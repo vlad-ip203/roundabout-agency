@@ -6,12 +6,12 @@ const KEYS = {
 }
 
 
-export function readTheme(): string {
+export function getStoredTheme(): string {
     const theme = window.localStorage.getItem(KEYS.THEME)
     return THEMES.some(value => value === theme) ?
         theme :
         THEME_SYSTEM
 }
-export function putTheme(value: string) {
+export function setStoredTheme(value: string) {
     window.localStorage.setItem(KEYS.THEME, value)
 }
