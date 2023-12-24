@@ -1,7 +1,7 @@
 export const SITE_NAME = "Розворот"
 export const SITE_DESCRIPTION = "Продаж/обмін/купівля нерухомості"
 
-export const NAV_HOME = "Головна сторінка"
+export const NAV_HOME = "Головна"
 export const NAV_ABOUT = "Про нас"
 export const NAV_THEME = "Тема інтерфейсу"
 
