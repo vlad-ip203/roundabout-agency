@@ -10,7 +10,7 @@
       <env name="BROWSER" value="none" />
     </envs>
     <method v="2">
-      <option name="LaunchBrowser.Before.Run" browser="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+      <option name="LaunchBrowser.Before.Run" browser="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" url="http://localhost:3000" />
     </method>
   </configuration>
 </component>
