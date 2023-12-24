@@ -1,12 +1,16 @@
 import React from "react"
-import {Container, Nav, Navbar} from "react-bootstrap"
+import {Container, DropdownItem, Nav, Navbar, NavDropdown} from "react-bootstrap"
 import {Link} from "react-router-dom"
-import {NAV_ABOUT, SITE_NAME} from "../lib/strings"
-import Logo from "./logo/Logo"
 import {App} from "../lib/consts"
+import {setTheme, useGlobalState} from "../lib/context"
+import {NAV_ABOUT, NAV_THEME, NAV_THEME_LIST, SITE_NAME} from "../lib/strings"
+import {THEMES} from "../lib/theme"
+import Logo from "./logo/Logo"
 
 
 export default function Header() {
+    const [, dispatch] = useGlobalState()
+
     return (
         <header className="sticky-top">
             <Navbar className="bg-body-tertiary"
@@ -25,6 +29,18 @@ export default function Header() {
                             <Link className="nav-link" to={App.ABOUT}>
                                 {NAV_ABOUT}
                             </Link>
+
+                            <NavDropdown title=".....">
+                                <NavDropdown.Divider/>
+
+                                <NavDropdown.Header>{NAV_THEME}</NavDropdown.Header>
+                                {THEMES.map(key =>
+                                    <DropdownItem key={key}
+                                                  onClick={() => setTheme(dispatch, key)}>
+                                        {NAV_THEME_LIST[key]}
+                                    </DropdownItem>,
+                                )}
+                            </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

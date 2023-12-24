@@ -38,7 +38,7 @@ const notifyContextChanged = (dispatch: Context) => dispatch({})
 
 
 const getTheme = (state: Context): string => state.theme
-function setTheme(dispatch: Context, value: string) {
+export function setTheme(dispatch: Context, value: string) {
     setStoredTheme(value)
     dispatch({theme: value})
 }
