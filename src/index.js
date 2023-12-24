@@ -1,8 +1,9 @@
+import {createClient} from "@supabase/supabase-js"
 import React from "react"
 import ReactDOM from "react-dom/client"
 import "./style/index.scss"
 import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom"
-import {App} from "./lib/consts"
+import {App, Supabase} from "./lib/consts"
 import {GlobalStateProvider} from "./lib/context"
 import ThemeProvider from "./lib/theme"
 import AboutPage from "./page/AboutPage"
@@ -12,6 +13,9 @@ import HomePage from "./page/HomePage"
 import RootLayout from "./page/RootLayout"
 import SearchPage from "./page/SearchPage"
 import reportWebVitals from "./test/reportWebVitals"
+
+
+export const supabase = createClient(Supabase.URL, Supabase.KEY)
 
 
 const router = createBrowserRouter([
