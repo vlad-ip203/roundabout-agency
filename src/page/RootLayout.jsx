@@ -1,16 +1,15 @@
-import {Outlet} from "react-router-dom"
 import {Container} from "react-bootstrap"
-import Header from "../component/Header"
 import Footer from "../component/Footer"
+import Header from "../component/Header"
 
 
-export default function RootLayout() {
+export default function RootLayout({children}) {
     return <>
         <Header/>
 
         <main className="mt-4">
             <Container>
-                <Outlet/>
+                {children}
             </Container>
         </main>
 

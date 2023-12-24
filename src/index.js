@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 import "./style/index.scss"
-import {createBrowserRouter, RouterProvider} from "react-router-dom"
+import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom"
 import {App} from "./lib/consts"
 import {GlobalStateProvider} from "./lib/context"
 import ThemeProvider from "./lib/theme"
@@ -15,8 +15,16 @@ import reportWebVitals from "./test/reportWebVitals"
 const router = createBrowserRouter([
     {
         path: App.HOME,
-        element: <RootLayout/>,
-        errorElement: <ErrorPage/>,
+        element: (
+            <RootLayout>
+                <Outlet/>
+            </RootLayout>
+        ),
+        errorElement: (
+            <RootLayout>
+                <ErrorPage/>
+            </RootLayout>
+        ),
         children: [
             {index: true, element: <HomePage/>},
             {path: App.ABOUT, element: <AboutPage/>},
