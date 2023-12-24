@@ -1,15 +1,14 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
-import "./style/fix.css"
-import "./style/index.css"
-import RootLayout from "./page/RootLayout"
-import reportWebVitals from "./test/reportWebVitals"
+import "./style/index.scss"
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
-import ErrorPage from "./page/ErrorPage"
-import AboutPage from "./page/AboutPage"
-import HomePage from "./page/HomePage"
 import {App} from "./lib/consts"
 import ThemeSelector from "./lib/theme"
+import AboutPage from "./page/AboutPage"
+import ErrorPage from "./page/ErrorPage"
+import HomePage from "./page/HomePage"
+import RootLayout from "./page/RootLayout"
+import reportWebVitals from "./test/reportWebVitals"
 
 
 const router = createBrowserRouter([

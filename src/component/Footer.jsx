@@ -32,8 +32,8 @@ export default function Footer() {
                         <h5>Навігація</h5>
 
                         <ul className="list-unstyled">
-                            <Link to={App.HOME}>{NAV_HOME}</Link>
-                            <Link to={App.ABOUT}>{NAV_ABOUT}</Link>
+                            <li><Link to={App.HOME}>{NAV_HOME}</Link></li>
+                            <li><Link to={App.ABOUT}>{NAV_ABOUT}</Link></li>
                         </ul>
                     </Col>
                 </Row>
