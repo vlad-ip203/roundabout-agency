@@ -13,7 +13,7 @@ export default function Header() {
 
     return (
         <header className="sticky-top">
-            <Navbar className="bg-body-tertiary"
+            <Navbar className="px-2 bg-body-tertiary"
                     expand="md">
                 <Container>
                     <Link className="navbar-brand" to={App.HOME}>

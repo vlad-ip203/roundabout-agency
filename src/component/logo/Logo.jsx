@@ -4,8 +4,10 @@ import React from "react"
 import styles from "./styles.module.scss"
 
 
-export default function Logo() {
+export default function Logo(props) {
     return (
-        <FontAwesomeIcon icon={faArrowsToDot} className={styles.logo}/>
+        <FontAwesomeIcon icon={faArrowsToDot}
+                         className={styles.logo}
+                         {...props}/>
     )
 }

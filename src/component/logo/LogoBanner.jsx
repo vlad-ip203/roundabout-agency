@@ -1,20 +1,21 @@
-import {faArrowsToDot} from "@fortawesome/free-solid-svg-icons"
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import React from "react"
-import {Container} from "react-bootstrap"
-import {SITE_DESCRIPTION, SITE_NAME} from "../../lib/strings"
-import styles from "./styles.module.css"
+import {SITE_NAME} from "../../lib/strings"
+import Logo from "./Logo"
+import styles from "./styles.module.scss"
 
 
 export default function LogoBanner() {
-    return (
-        <Container fluid>
-            <FontAwesomeIcon icon={faArrowsToDot}
-                             className={styles.logoBanner}/>
+    return <>
+        <Logo className={styles.logo + " " + styles.logoBanner}/>
 
-            <h1>{SITE_NAME}</h1>
+        <h1 className="fw-bold">{SITE_NAME}</h1>
 
-            <p>{SITE_DESCRIPTION}</p>
-        </Container>
-    )
+        <h5 className="text-primary-emphasis fw-bold">Агентство нерухомості</h5>
+
+        <p>
+            Продаж / Оренда / Купівля / Обмін
+            <br/>
+            та інші операції з нерухомістю
+        </p>
+    </>
 }
