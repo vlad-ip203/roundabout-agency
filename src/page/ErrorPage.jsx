@@ -10,12 +10,12 @@ export default function ErrorPage() {
         <h1>Опаньки!</h1>
         <p>Схоже, що ви запитуєте сторінку, якої у нас немає</p>
 
-        <p className="text-info">
+        <p className="text-info font-monospace">
             Помилка: {error.status}
             <br/>
             Деталі: {error.statusText || error.data.message}
         </p>
 
-        <p>Перехід на <Link to={App.ABOUT}>головну сторінку</Link> - теж непогана ідея</p>
+        <p>Перехід на <Link to={App.HOME}>головну сторінку</Link> - теж непогана ідея</p>
     </>
 }

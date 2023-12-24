@@ -7,7 +7,7 @@ export default function RootLayout({children}) {
     return <>
         <Header/>
 
-        <main className="mt-4">
+        <main className="m-3 mt-4 mb-5">
             <Container>
                 {children}
             </Container>

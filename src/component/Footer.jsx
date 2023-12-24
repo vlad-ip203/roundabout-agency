@@ -19,12 +19,8 @@ export default function Footer() {
                         <h5>Контакти</h5>
 
                         <ul className="list-unstyled">
-                            <li>
-                                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
-                            </li>
-                            <li>
-                                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a>
-                            </li>
+                            <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+                            <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
                         </ul>
                     </Col>
 
