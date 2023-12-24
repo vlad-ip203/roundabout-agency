@@ -1,6 +1,16 @@
 //Include functions first (so you can manipulate colors, SVGs, calc, etc)
 @import "bootstrap/scss/functions";
 //Include any default variable overrides here
+$primary: #9f3f3f;
+$secondary: #875300;
+$success: #4e6700;
+$info: #5854a8;
+$warning: #8e4e00;
+$danger: #9c4141;
+$light: #fffbff;
+$dark: #201a1a;
+$body-color: $dark;
+$body-bg: $light;
 //Include remainder of required Bootstrap stylesheets
 @import "bootstrap/scss/variables";
 @import "bootstrap/scss/variables-dark";
