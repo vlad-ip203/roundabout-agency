@@ -1,19 +1,12 @@
-.logo, .logoBanner {
+.logo {
+    color: var(--bs-secondary-text-emphasis);
     pointer-events: none;
 }
-
-.logoBanner {
-    height: 36vmin;
-    max-height: 144px;
-}
-
-
 @media (prefers-reduced-motion: no-preference) {
-    .logo, .logoBanner {
+    .logo {
         animation: logo-spin infinite 20s linear;
     }
 }
-
 @keyframes logo-spin {
     from {
         transform: rotate(0deg);
@@ -21,4 +14,11 @@
     to {
         transform: rotate(360deg);
     }
+}
+
+.logoBanner {
+    height: 36vmin;
+    width: 36vmin;
+    max-height: 144px;
+    max-width: 144px;
 }
