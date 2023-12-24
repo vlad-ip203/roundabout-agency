@@ -4,6 +4,7 @@ import "./style/index.scss"
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import {App} from "./lib/consts"
 import ThemeSelector from "./lib/theme"
+import {GlobalStateProvider} from "./lib/context"
 import AboutPage from "./page/AboutPage"
 import ErrorPage from "./page/ErrorPage"
 import HomePage from "./page/HomePage"
@@ -27,8 +28,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
     <React.StrictMode>
         <ThemeSelector>
+        <GlobalStateProvider>
             <RouterProvider router={router}/>
-        </ThemeSelector>
+        </GlobalStateProvider>
     </React.StrictMode>,
 )
 
