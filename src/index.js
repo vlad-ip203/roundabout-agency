@@ -6,9 +6,11 @@ import {App} from "./lib/consts"
 import {GlobalStateProvider} from "./lib/context"
 import ThemeProvider from "./lib/theme"
 import AboutPage from "./page/AboutPage"
+import AuthPage from "./page/AuthPage"
 import ErrorPage from "./page/ErrorPage"
 import HomePage from "./page/HomePage"
 import RootLayout from "./page/RootLayout"
+import SearchPage from "./page/SearchPage"
 import reportWebVitals from "./test/reportWebVitals"
 
 
@@ -27,7 +29,9 @@ const router = createBrowserRouter([
         ),
         children: [
             {index: true, element: <HomePage/>},
+            {path: App.SEARCH, element: <SearchPage/>},
             {path: App.ABOUT, element: <AboutPage/>},
+            {path: App.AUTH, element: <AuthPage/>},
         ],
     },
 ])

@@ -3,7 +3,7 @@ import {Container, DropdownItem, Nav, Navbar, NavDropdown} from "react-bootstrap
 import {Link} from "react-router-dom"
 import {App} from "../lib/consts"
 import {setTheme, useGlobalState} from "../lib/context"
-import {NAV_ABOUT, NAV_THEME, NAV_THEME_LIST, SITE_NAME} from "../lib/strings"
+import {NAV_ABOUT, NAV_AUTH, NAV_SEARCH, NAV_THEME, NAV_THEME_LIST, SITE_NAME} from "../lib/strings"
 import {THEMES} from "../lib/theme"
 import Logo from "./logo/Logo"
 
@@ -26,11 +26,14 @@ export default function Header() {
 
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <Link className="nav-link" to={App.ABOUT}>
-                                {NAV_ABOUT}
-                            </Link>
+                            <Link className="nav-link" to={App.SEARCH}>{NAV_SEARCH}</Link>
+                            <Link className="nav-link" to={App.ABOUT}>{NAV_ABOUT}</Link>
+                        </Nav>
 
+                        <Nav>
                             <NavDropdown title=".....">
+                                <Link className="dropdown-item" to={App.AUTH}>{NAV_AUTH}</Link>
+
                                 <NavDropdown.Divider/>
 
                                 <NavDropdown.Header>{NAV_THEME}</NavDropdown.Header>

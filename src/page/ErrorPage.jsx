@@ -7,7 +7,8 @@ export default function ErrorPage() {
     console.error(error)
 
     return <>
-        <h1>Опаньки!</h1>
+        <h2 className="fw-bold">Опаньки!</h2>
+
         <p>Схоже, що ви запитуєте сторінку, якої у нас немає</p>
 
         <p className="text-info font-monospace">
