@@ -1,7 +1,7 @@
 import {Auth} from "@supabase/auth-ui-react"
 import React, {useEffect, useState} from "react"
 import {Container} from "react-bootstrap"
-import {redirect} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import {SUPABASE} from "../../index"
 import {App} from "../../lib/consts"
 import {getAppTheme, useGlobalState} from "../../lib/context"
@@ -14,6 +14,8 @@ import styles from "./styles.module.css"
 export default function AuthPage() {
     const [state] = useGlobalState()
     const theme = getAppTheme(state)
+
+    const navigate = useNavigate()
 
     const [session, setSession] = useState(null)
 
@@ -33,7 +35,7 @@ export default function AuthPage() {
 
     //User already authorized
     if (session) {
-        redirect(App.HOME)
+        navigate(App.HOME)
         return
     }
 
