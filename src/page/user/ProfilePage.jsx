@@ -35,10 +35,9 @@ export default function ProfilePage() {
             console.log("getProfile", session)
             const {user} = session
 
-            //TODO 25.12.2023: Add picture as URL
             const {data, error} = await SUPABASE
                 .from("profiles")
-                .select("name, phone")
+                .select("name, phone, picture")
                 .eq("id", user.id)
                 .single()
 
@@ -47,6 +46,7 @@ export default function ProfilePage() {
                     Log.w("Error getting profile data: " + error)
                     return
                 } else if (data) {
+                    //TODO 25.12.2023: Add picture as URL
                     //setPicture(data.picture)
                     setName(data.name)
                     setEmail(user.email)
@@ -70,7 +70,6 @@ export default function ProfilePage() {
         const {user} = session
 
         const updates = {
-            id: user.id,
             updated_at: new Date(),
             picture,
             name,
@@ -79,7 +78,8 @@ export default function ProfilePage() {
 
         const {error} = await SUPABASE
             .from("profiles")
-            .upsert(updates)
+            .update(updates)
+            .eq("id", user.id)
 
         if (error) {
             alert(error.message)
