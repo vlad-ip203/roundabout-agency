@@ -1,13 +1,12 @@
 import {Auth} from "@supabase/auth-ui-react"
 import React, {useEffect, useState} from "react"
-import {Container} from "react-bootstrap"
+import {Col, Row} from "react-bootstrap"
 import {useNavigate} from "react-router-dom"
 import {SUPABASE} from "../../index"
 import {App, Strings} from "../../lib/consts"
 import {getAppTheme, useGlobalState} from "../../lib/context"
-import {THEME_LIGHT} from "../../lib/theme"
+import {THEME_LIGHT} from "../../lib/theme/consts"
 import {AUTH_FORM_LOCALE, AUTH_FORM_THEME} from "./config"
-import styles from "./styles.module.css"
 
 
 export default function AuthPage() {
@@ -46,21 +45,19 @@ export default function AuthPage() {
             них і публікувати власні.
         </p>
 
-        <Container className={"mx-auto " + styles.formBlock}>
-            <Auth supabaseClient={SUPABASE}
-                  appearance={{theme: AUTH_FORM_THEME}}
-                  localization={{variables: AUTH_FORM_LOCALE}}
-                  theme={
-                      theme === THEME_LIGHT ?
-                          "light" :
-                          "dark"
-                  }
-                  providers={[
-                      "google",
-                      "apple",
-                      "facebook",
-                      "twitter",
-                  ]}/>
-        </Container>
+        <Row>
+            <Col md={{span: 6, offset: 3}}>
+                <Auth supabaseClient={SUPABASE}
+                      appearance={{theme: AUTH_FORM_THEME}}
+                      localization={{variables: AUTH_FORM_LOCALE}}
+                      theme={theme === THEME_LIGHT ? "light" : "dark"}
+                      providers={[
+                          "google",
+                          "apple",
+                          "facebook",
+                          "twitter",
+                      ]}/>
+            </Col>
+        </Row>
     </>
 }
