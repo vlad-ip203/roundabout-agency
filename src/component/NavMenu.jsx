@@ -1,6 +1,7 @@
 import React from "react"
 import {Container, DropdownItem, Nav, Navbar, NavDropdown} from "react-bootstrap"
 import {Link} from "react-router-dom"
+import {signOut} from "../lib/auth/auth"
 import {App, Strings} from "../lib/consts"
 import {setTheme, useGlobalState} from "../lib/context"
 import {THEMES} from "../lib/theme/consts"
@@ -31,6 +32,8 @@ export default function NavMenu() {
                     <Nav>
                         <NavDropdown title="Профіль.....">
                             <Link className="dropdown-item" to={App.AUTH}>{Strings.NAV_AUTH}</Link>
+                            <Link className="dropdown-item" to={App.PROFILE}>{Strings.NAV_PROFILE}</Link>
+                            <Link className="dropdown-item" to={App.HOME} onClick={signOut}>{Strings.SIGN_OUT}</Link>
 
                             <NavDropdown.Divider/>
 

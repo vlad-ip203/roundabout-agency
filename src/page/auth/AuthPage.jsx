@@ -1,41 +1,27 @@
 import {Auth} from "@supabase/auth-ui-react"
-import React, {useEffect, useState} from "react"
+import React, {useEffect} from "react"
 import {Col, Row} from "react-bootstrap"
 import {useNavigate} from "react-router-dom"
 import {SUPABASE} from "../../index"
 import {App, Strings} from "../../lib/consts"
-import {getAppTheme, useGlobalState} from "../../lib/context"
+import {getAppTheme, getSession, useGlobalState} from "../../lib/context"
 import {THEME_LIGHT} from "../../lib/theme/consts"
 import {AUTH_FORM_LOCALE, AUTH_FORM_PROVIDERS, AUTH_FORM_THEME} from "./config"
 
 
 export default function AuthPage() {
     const [state] = useGlobalState()
+    const session = getSession(state)
     const theme = getAppTheme(state)
 
     const navigate = useNavigate()
 
-    const [session, setSession] = useState(null)
-
     useEffect(() => {
-        SUPABASE.auth.getSession().then(({data: {session}}) => {
-            setSession(session)
-        })
+        //User already authorized, return home
+        if (session)
+            return navigate(App.HOME)
+    }, [navigate, session])
 
-        const {
-            data: {subscription},
-        } = SUPABASE.auth.onAuthStateChange((_event, session) => {
-            setSession(session)
-        })
-
-        return () => subscription.unsubscribe()
-    }, [])
-
-    //User already authorized
-    if (session) {
-        navigate(App.HOME)
-        return
-    }
 
     return <>
         <h2 className="fw-bold">{Strings.NAV_AUTH}</h2>

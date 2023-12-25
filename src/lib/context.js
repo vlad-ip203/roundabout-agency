@@ -1,5 +1,6 @@
 // noinspection JSUnresolvedReference
 
+import {Session} from "@supabase/supabase-js"
 import React from "react"
 import {Log} from "./log"
 import {getStoredTheme, setStoredTheme} from "./storage"
@@ -7,6 +8,7 @@ import {THEME_DARK, THEME_LIGHT, THEME_SYSTEM} from "./theme/consts"
 
 
 const defaultGlobalState = {
+    session: null,
     theme: getStoredTheme(),
 }
 
@@ -35,6 +37,14 @@ export const useGlobalState = () => [
 ]
 
 const notifyContextChanged = (dispatch) => dispatch({})
+
+
+export function getSession(state): null | Session {
+    return state.session
+}
+export function setSession(dispatch, session: Session) {
+    dispatch({session})
+}
 
 
 const getTheme = (state) => state.theme
