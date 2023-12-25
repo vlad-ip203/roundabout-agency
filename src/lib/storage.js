@@ -1,4 +1,4 @@
-import {THEME_SYSTEM, THEMES} from "./theme"
+import {THEME_SYSTEM, THEMES} from "./theme/consts"
 
 
 const KEYS = {

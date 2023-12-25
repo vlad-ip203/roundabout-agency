@@ -3,7 +3,7 @@
 import React, {Context} from "react"
 import {Log} from "./log"
 import {getStoredTheme, setStoredTheme} from "./storage"
-import {THEME_DARK, THEME_LIGHT, THEME_SYSTEM} from "./theme"
+import {THEME_DARK, THEME_LIGHT, THEME_SYSTEM} from "./theme/consts"
 
 
 const defaultGlobalState = {

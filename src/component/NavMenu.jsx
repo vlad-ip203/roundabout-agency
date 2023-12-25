@@ -3,7 +3,7 @@ import {Container, DropdownItem, Nav, Navbar, NavDropdown} from "react-bootstrap
 import {Link} from "react-router-dom"
 import {App, Strings} from "../lib/consts"
 import {setTheme, useGlobalState} from "../lib/context"
-import {THEMES} from "../lib/theme"
+import {THEMES} from "../lib/theme/consts"
 import Logo from "./logo/Logo"
 
 
