@@ -15,7 +15,7 @@ import SearchPage from "./page/SearchPage"
 import reportWebVitals from "./test/reportWebVitals"
 
 
-export const supabase = createClient(Supabase.URL, Supabase.KEY)
+export const SUPABASE = createClient(Supabase.URL, Supabase.KEY)
 
 
 const router = createBrowserRouter([
