@@ -1,3 +1,10 @@
+export const AUTH_FORM_PROVIDERS = [
+    "google",
+    "apple",
+    "facebook",
+    "twitter",
+]
+
 //Reference: https://github.com/supabase/auth-ui/blob/main/packages/shared/src/theming/Types.ts
 export const AUTH_FORM_THEME = {
     default: {

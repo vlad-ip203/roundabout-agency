@@ -6,7 +6,7 @@ import {SUPABASE} from "../../index"
 import {App, Strings} from "../../lib/consts"
 import {getAppTheme, useGlobalState} from "../../lib/context"
 import {THEME_LIGHT} from "../../lib/theme/consts"
-import {AUTH_FORM_LOCALE, AUTH_FORM_THEME} from "./config"
+import {AUTH_FORM_LOCALE, AUTH_FORM_PROVIDERS, AUTH_FORM_THEME} from "./config"
 
 
 export default function AuthPage() {
@@ -51,12 +51,7 @@ export default function AuthPage() {
                       appearance={{theme: AUTH_FORM_THEME}}
                       localization={{variables: AUTH_FORM_LOCALE}}
                       theme={theme === THEME_LIGHT ? "light" : "dark"}
-                      providers={[
-                          "google",
-                          "apple",
-                          "facebook",
-                          "twitter",
-                      ]}/>
+                      providers={AUTH_FORM_PROVIDERS}/>
             </Col>
         </Row>
     </>
