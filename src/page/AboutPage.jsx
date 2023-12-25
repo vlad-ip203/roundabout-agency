@@ -1,10 +1,10 @@
 import React from "react"
-import {NAV_ABOUT} from "../lib/strings"
+import {Strings} from "../lib/consts"
 
 
 export default function AboutPage() {
     return <>
-        <h2 className="fw-bold">{NAV_ABOUT}</h2>
+        <h2 className="fw-bold">{Strings.SITE_NAME}</h2>
 
         <p>
             Ласкаво просимо! Наша місія - надавати високоякісні послуги для тих, хто шукає ідеальне житло або

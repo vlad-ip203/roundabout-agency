@@ -1,8 +1,7 @@
 import React from "react"
 import {Col, Container, Row} from "react-bootstrap"
 import {Link} from "react-router-dom"
-import {App} from "../lib/consts"
-import {NAV_ABOUT, NAV_HOME} from "../lib/strings"
+import {App, Strings} from "../lib/consts"
 import LogoBanner from "./logo/LogoBanner"
 
 
@@ -19,8 +18,8 @@ export default function Footer() {
                         <h5>Навігація</h5>
 
                         <ul className="list-unstyled">
-                            <li><Link to={App.HOME}>{NAV_HOME}</Link></li>
-                            <li><Link to={App.ABOUT}>{NAV_ABOUT}</Link></li>
+                            <li><Link to={App.HOME}>{Strings.NAV_HOME}</Link></li>
+                            <li><Link to={App.ABOUT}>{Strings.NAV_ABOUT}</Link></li>
                         </ul>
                     </Col>
 

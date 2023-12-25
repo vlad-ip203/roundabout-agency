@@ -3,9 +3,8 @@ import React, {useEffect, useState} from "react"
 import {Container} from "react-bootstrap"
 import {useNavigate} from "react-router-dom"
 import {SUPABASE} from "../../index"
-import {App} from "../../lib/consts"
+import {App, Strings} from "../../lib/consts"
 import {getAppTheme, useGlobalState} from "../../lib/context"
-import {NAV_AUTH} from "../../lib/strings"
 import {THEME_LIGHT} from "../../lib/theme"
 import {AUTH_FORM_LOCALE, AUTH_FORM_THEME} from "./config"
 import styles from "./styles.module.css"
@@ -40,7 +39,7 @@ export default function AuthPage() {
     }
 
     return <>
-        <h2 className="fw-bold">{NAV_AUTH}</h2>
+        <h2 className="fw-bold">{Strings.NAV_AUTH}</h2>
 
         <p>
             Створення акаунту дає можливість не тільки переглядати оголошення про нерухомість, а також відповідати на
