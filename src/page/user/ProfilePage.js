@@ -24,9 +24,9 @@ export default function ProfilePage() {
 
     useEffect(() => {
         console.log("useEffect", session)
-        //User not authorized
+        //User not authorized, return to auth page
         if (!session)
-            return
+            return navigate(App.AUTH)
 
         let ignore = false
 
@@ -35,9 +35,10 @@ export default function ProfilePage() {
             console.log("getProfile", session)
             const {user} = session
 
+            //TODO 25.12.2023: Add picture as URL
             const {data, error} = await SUPABASE
                 .from("profiles")
-                .select("name, phone, picture")
+                .select("name, phone")
                 .eq("id", user.id)
                 .single()
 
@@ -46,7 +47,7 @@ export default function ProfilePage() {
                     Log.w("Error getting profile data: " + error)
                     return
                 } else if (data) {
-                    setPicture(data.picture)
+                    //setPicture(data.picture)
                     setName(data.name)
                     setEmail(user.email)
                     setPhone(data.phone)
@@ -60,20 +61,12 @@ export default function ProfilePage() {
         return () => {
             ignore = true
         }
-    }, [session])
-
-    useEffect(() => {
-        //User not authorized, return to auth page
-        console.log("ProfilePage", session)
-        if (!session)
-            return navigate(App.AUTH)
     }, [navigate, session])
 
     async function updateProfile(event) {
         event.preventDefault()
 
         setLoading(true)
-        console.log("updateProfile", session)
         const {user} = session
 
         const updates = {
@@ -104,7 +97,7 @@ export default function ProfilePage() {
         if (file) {
             const reader = new FileReader()
             reader.onloadend = () => {
-                setPicture(reader.result)
+                //setPicture(reader.result)
             }
             reader.readAsDataURL(file)
         }

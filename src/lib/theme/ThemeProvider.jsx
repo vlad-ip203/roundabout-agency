@@ -8,5 +8,7 @@ export default function ThemeProvider() {
     const theme = getAppTheme(state)
     document.documentElement.setAttribute("data-bs-theme", theme)
 
-    useEffect(() => listenSystemThemeChanges(state, dispatch))
+    useEffect(() => {
+        listenSystemThemeChanges(state, dispatch)
+    }, [dispatch, state])
 }

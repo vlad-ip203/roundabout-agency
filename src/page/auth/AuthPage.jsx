@@ -22,7 +22,6 @@ export default function AuthPage() {
             return navigate(App.HOME)
     }, [navigate, session])
 
-
     return <>
         <h2 className="fw-bold">{Strings.NAV_AUTH}</h2>
 
