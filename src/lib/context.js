@@ -1,6 +1,6 @@
 // noinspection JSUnresolvedReference
 
-import React, {Context} from "react"
+import React from "react"
 import {Log} from "./log"
 import {getStoredTheme, setStoredTheme} from "./storage"
 import {THEME_DARK, THEME_LIGHT, THEME_SYSTEM} from "./theme/consts"
@@ -34,16 +34,16 @@ export const useGlobalState = () => [
     React.useContext(DispatchStateContext),
 ]
 
-const notifyContextChanged = (dispatch: Context) => dispatch({})
+const notifyContextChanged = (dispatch) => dispatch({})
 
 
-const getTheme = (state: Context): string => state.theme
-export function setTheme(dispatch: Context, value: string) {
-    setStoredTheme(value)
-    dispatch({theme: value})
+const getTheme = (state) => state.theme
+export function setTheme(dispatch, theme: string) {
+    setStoredTheme(theme)
+    dispatch({theme})
 }
 
-export function getAppTheme(state: Context): string {
+export function getAppTheme(state) {
     switch (getTheme(state)) {
         default:
         case THEME_SYSTEM:
@@ -55,10 +55,10 @@ export function getAppTheme(state: Context): string {
     }
 }
 
-const themeListenerSupported = (): boolean =>
+const themeListenerSupported = () =>
     window.matchMedia("(prefers-color-scheme: dark)").media !== "not all"
 
-function getSystemTheme(): string {
+function getSystemTheme() {
     if (!themeListenerSupported())
         return THEME_LIGHT
 
@@ -67,7 +67,7 @@ function getSystemTheme(): string {
         THEME_LIGHT  //System theme is light
 }
 
-export function listenSystemThemeChanges(state: Context, dispatch: Context) {
+export function listenSystemThemeChanges(state, dispatch) {
     if (!themeListenerSupported())
         return
 

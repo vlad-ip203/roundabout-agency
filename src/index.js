@@ -39,6 +39,17 @@ const router = createBrowserRouter([
         ],
     },
 ])
+const router = createBrowserRouter([{
+    path: App.HOME,
+    element: <RootLayout><Outlet/></RootLayout>,
+    errorElement: <RootLayout><ErrorPage/></RootLayout>,
+    children: [
+        {index: true, element: <HomePage/>},
+        {path: App.SEARCH, element: <SearchPage/>},
+        {path: App.ABOUT, element: <AboutPage/>},
+        {path: App.AUTH, element: <AuthPage/>},
+    ],
+}])
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
