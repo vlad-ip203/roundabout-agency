@@ -6,18 +6,23 @@ const KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZi
 
 
 export default class DatabaseManager {
-    client: SupabaseClient
+    _client: SupabaseClient
 
     constructor() {
-        this.client = createClient(URL, KEY)
+        this._client = createClient(URL, KEY)
     }
 
 
-    auth() {
-        return this.client.auth
+    client() {
+        return this._client
     }
+
+    authClient() {
+        return this._client.auth
+    }
+
 
     profiles() {
-        return this.client.from("profiles")
+        return this._client.from("profiles")
     }
 }

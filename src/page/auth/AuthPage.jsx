@@ -32,7 +32,7 @@ export default function AuthPage() {
 
         <Row>
             <Col md={{span: 6, offset: 3}}>
-                <Auth supabaseClient={DB.client}
+                <Auth supabaseClient={DB.client()}
                       appearance={{theme: AUTH_FORM_THEME}}
                       localization={{variables: AUTH_FORM_LOCALE}}
                       theme={theme === THEME_LIGHT ? "light" : "dark"}

@@ -7,7 +7,7 @@ export default function SessionProvider() {
     const [, dispatch] = useGlobalState()
 
     useEffect(() => {
-        DB.auth()
+        DB.authClient()
             .getSession()
             .then(({data: {session}}) => {
                 setSession(dispatch, session)
@@ -15,7 +15,7 @@ export default function SessionProvider() {
 
         const {
             data: {subscription},
-        } = DB.auth()
+        } = DB.authClient()
             .onAuthStateChange((_event, session) => {
                 setSession(dispatch, session)
             })
