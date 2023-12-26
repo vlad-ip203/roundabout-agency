@@ -1,13 +1,14 @@
 // noinspection JSUnresolvedReference
 
 import React, {useEffect, useState} from "react"
-import {Button, Col, Container, Form, Image, Row} from "react-bootstrap"
+import {Button, Col, Container, Form, Row} from "react-bootstrap"
 import {useNavigate} from "react-router-dom"
 import {DB} from "../../index"
 import {signOut} from "../../lib/auth/auth"
 import {App, Strings} from "../../lib/consts"
 import {getSession, useGlobalState} from "../../lib/context"
 import {Log} from "../../lib/log"
+import Avatar from "./Avatar"
 
 
 export default function ProfilePage() {
@@ -23,16 +24,18 @@ export default function ProfilePage() {
     const [phone, setPhone] = useState("")
 
     useEffect(() => {
-        console.log("useEffect", session)
         //User not authorized, return to auth page
         if (!session)
             return navigate(App.AUTH)
 
+        Log.v("Preparing getting user profile")
+
         let ignore = false
 
         async function getProfile() {
+            Log.v("Getting user profile")
             setLoading(true)
-            console.log("getProfile", session)
+
             const {user} = session
 
             //Query profile data
@@ -44,9 +47,9 @@ export default function ProfilePage() {
             if (!ignore) {
                 if (error) {
                     Log.w("Error getting profile data: " + error)
+                    setLoading(false)
                     return
                 } else if (data) {
-                    //TODO 25.12.2023: Add picture as URL
                     setAvatarURL(data.avatar_url)
                     setName(data.name)
                     setEmail(user.email)
@@ -66,6 +69,7 @@ export default function ProfilePage() {
     async function updateProfile(event) {
         event.preventDefault()
 
+        Log.v("Updating user profile")
         setLoading(true)
 
         const {user} = session
@@ -85,8 +89,7 @@ export default function ProfilePage() {
         if (error) {
             alert(error.message)
         } else {
-            //TODO 26.12.2023: What???
-            //setAvatar(avatarURL)
+            setAvatarURL(avatarURL)
         }
 
         setLoading(false)
@@ -94,49 +97,34 @@ export default function ProfilePage() {
 
     const onNameChange = (e) => setName(e.target.value)
     const onPhoneChange = (e) => setPhone(e.target.value)
-    const onPictureChange = (e) => {
-        const file = e.target.files[0]
-
-        if (file) {
-            const reader = new FileReader()
-            reader.onloadend = () => {
-                //setAvatar(reader.result)
-            }
-            reader.readAsDataURL(file)
-        }
-    }
+    const onPictureChange = (e, path) => setAvatarURL(path)
 
     return <>
         <h2 className="fw-bold">{Strings.NAV_PROFILE}</h2>
 
         <Row>
             <Col md={{span: 6, offset: 3}}>
-                <Form onSubmit={event => updateProfile(event)}>
-                    <Container className="text-center">
-                        <Form.Label htmlFor="pictureControl"
-                                    className="user-select-all">
-                            <Image className="rounded-circle mb-3 profile-picture"
-                                   alt="Профільне фото"
-                                   src={avatarURL || "https://via.placeholder.com/150"}/>
-
-                            <Form.Control id="pictureControl"
-                                          type="file"
-                                          className="d-none"
-                                          onChange={onPictureChange}/>
-                        </Form.Label>
+                <Form onSubmit={updateProfile}>
+                    <Container className="mb-3 text-center">
+                        <Avatar size={150}
+                                url={avatarURL}
+                                onUpload={onPictureChange}/>
                     </Container>
 
-                    <Form.Group>
-                        <Form.Label htmlFor="nameControl">Ім'я</Form.Label>
+                    <Form.Group className="mb-3">
+                        <Form.Label htmlFor="nameControl"
+                                    className="mb-2">Ім'я</Form.Label>
                         <Form.Control id="nameControl"
                                       type="text"
                                       placeholder="Введіть ваше ім'я"
                                       value={name}
-                                      onChange={onNameChange}/>
+                                      onChange={onNameChange}
+                                      disabled={loading}/>
                     </Form.Group>
 
-                    <Form.Group>
-                        <Form.Label htmlFor="emailControl">Адреса електронної пошти</Form.Label>
+                    <Form.Group className="mb-3">
+                        <Form.Label htmlFor="emailControl"
+                                    className="mb-2">Адреса електронної пошти</Form.Label>
                         <Form.Control id="emailControl"
                                       type="email"
                                       placeholder="Ваш метод входу не надав поштової скриньки"
@@ -144,25 +132,37 @@ export default function ProfilePage() {
                                       disabled={true}/>
                     </Form.Group>
 
-                    <Form.Group>
-                        <Form.Label htmlFor="phoneControl">Номер телефону</Form.Label>
+                    <Form.Group className="mb-5">
+                        <Form.Label htmlFor="phoneControl"
+                                    className="mb-2">Номер телефону</Form.Label>
                         <Form.Control id="phoneControl"
                                       type="text"
                                       placeholder="Введіть номер телефону"
                                       value={phone}
-                                      onChange={onPhoneChange}/>
+                                      onChange={onPhoneChange}
+                                      disabled={loading}/>
                     </Form.Group>
 
-                    <Button variant="primary"
-                            type="submit"
-                            disabled={loading}>
-                        {loading ? "Завантаження..." : "Зберегти"}
-                    </Button>
-                    <Button variant="secondary"
-                            type="button"
-                            onClick={signOut}>
-                        {Strings.SIGN_OUT}
-                    </Button>
+                    <Row className="text-center">
+                        <Col>
+                            <Button className="w-100"
+                                    variant="primary"
+                                    type="submit"
+                                    disabled={loading}>
+                                {loading ? "Завантаження..." : "Зберегти"}
+                            </Button>
+                        </Col>
+
+                        <Col>
+                            <Button className="w-100"
+                                    variant="secondary"
+                                    type="button"
+                                    onClick={signOut}
+                                    disabled={loading}>
+                                {Strings.SIGN_OUT}
+                            </Button>
+                        </Col>
+                    </Row>
                 </Form>
             </Col>
         </Row>
