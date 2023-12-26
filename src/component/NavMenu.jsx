@@ -1,13 +1,42 @@
+import {faCircleHalfStroke, faMoon, faSun} from "@fortawesome/free-solid-svg-icons"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import React, {useEffect, useState} from "react"
-import {Container, DropdownItem, Nav, Navbar, NavDropdown} from "react-bootstrap"
+import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap"
 import {Link} from "react-router-dom"
 import {DB} from "../index"
 import {App, Strings} from "../lib/consts"
-import {getSession, setTheme, useGlobalState} from "../lib/context"
+import {getSession, getTheme, setTheme, useGlobalState} from "../lib/context"
 import {signOut} from "../lib/db/auth/auth"
 import {Log} from "../lib/log"
-import {THEMES} from "../lib/theme/consts"
+import {THEME_DARK, THEME_LIGHT, THEME_SYSTEM} from "../lib/theme/consts"
 import Logo from "./logo/Logo"
+
+
+function getThemeIcon(state, dispatch) {
+    const theme = getTheme(state)
+
+    let toggleTheme
+    let toggleIcon
+    if (theme === THEME_SYSTEM) {
+        toggleTheme = () => setTheme(dispatch, THEME_LIGHT)
+        toggleIcon = faCircleHalfStroke
+    } else if (theme === THEME_LIGHT) {
+        toggleTheme = () => setTheme(dispatch, THEME_DARK)
+        toggleIcon = faSun
+    } else {
+        toggleTheme = () => setTheme(dispatch, THEME_SYSTEM)
+        toggleIcon = faMoon
+    }
+
+    return <>
+        <Nav.Link onClick={toggleTheme}>
+            <FontAwesomeIcon icon={toggleIcon}
+                             className="text-secondary-emphasis"
+                             size="lg"
+                             width={28}/>
+        </Nav.Link>
+    </>
+}
 
 
 export default function NavMenu() {
@@ -24,7 +53,7 @@ export default function NavMenu() {
             return
 
         async function getProfile() {
-            Log.v("Getting user profile")
+            Log.v("Getting user profile for NavMenu")
 
             const {user} = session
 
@@ -39,7 +68,6 @@ export default function NavMenu() {
                 setProfile(data)
             }
         }
-
         void getProfile()
     }, [state])
 
@@ -61,31 +89,21 @@ export default function NavMenu() {
                         <Link className="nav-link" to={App.ABOUT}>{Strings.ABOUT}</Link>
                     </Nav>
 
-                    {!profile &&
-                        <Nav className="ms-auto">
-                            <Link className="dropdown-item" to={App.AUTH}>{Strings.AUTH}</Link>
-                        </Nav>
-                    }
+                    <Nav className="ms-auto">
+                        {!profile &&
+                            <Link className="nav-link" to={App.AUTH}>{Strings.AUTH}</Link>
+                        }
 
-                    {profile &&
-                        <Nav>
+                        {profile &&
                             <NavDropdown title={profile.name || "Профіль користувача"}>
                                 <Link className="dropdown-item" to={App.PROFILE}>{Strings.PROFILE}</Link>
                                 <Link className="dropdown-item" to={App.HOME}
                                       onClick={signOut}>{Strings.SIGN_OUT}</Link>
-
-                                <NavDropdown.Divider/>
-
-                                <NavDropdown.Header>{Strings.THEME}</NavDropdown.Header>
-                                {THEMES.map(key =>
-                                    <DropdownItem key={key}
-                                                  onClick={() => setTheme(dispatch, key)}>
-                                        {Strings.THEME_LIST[key]}
-                                    </DropdownItem>,
-                                )}
                             </NavDropdown>
-                        </Nav>
-                    }
+                        }
+
+                        {getThemeIcon(state, dispatch)}
+                    </Nav>
                 </Navbar.Collapse>
             </Container>
         </Navbar>

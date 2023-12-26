@@ -29,7 +29,7 @@ export default function ProfilePage() {
         let ignore = false
 
         async function getProfile() {
-            Log.v("Getting user profile")
+            Log.v("Getting user profile for ProfilePage")
             setLoading(true)
 
             const {user} = session

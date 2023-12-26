@@ -47,7 +47,7 @@ export function setSession(dispatch, session: Session) {
 }
 
 
-const getTheme = (state) => state.theme
+export const getTheme = (state) => state.theme
 export function setTheme(dispatch, theme: string) {
     setStoredTheme(theme)
     dispatch({theme})
