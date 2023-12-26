@@ -2,7 +2,7 @@ import {Auth} from "@supabase/auth-ui-react"
 import React, {useEffect} from "react"
 import {Col, Row} from "react-bootstrap"
 import {useNavigate} from "react-router-dom"
-import {SUPABASE} from "../../index"
+import {DB} from "../../index"
 import {App, Strings} from "../../lib/consts"
 import {getAppTheme, getSession, useGlobalState} from "../../lib/context"
 import {THEME_LIGHT} from "../../lib/theme/consts"
@@ -32,7 +32,7 @@ export default function AuthPage() {
 
         <Row>
             <Col md={{span: 6, offset: 3}}>
-                <Auth supabaseClient={SUPABASE}
+                <Auth supabaseClient={DB.client}
                       appearance={{theme: AUTH_FORM_THEME}}
                       localization={{variables: AUTH_FORM_LOCALE}}
                       theme={theme === THEME_LIGHT ? "light" : "dark"}

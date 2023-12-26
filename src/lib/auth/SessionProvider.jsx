@@ -1,5 +1,5 @@
 import {useEffect} from "react"
-import {SUPABASE} from "../../index"
+import {DB} from "../../index"
 import {setSession, useGlobalState} from "../context"
 
 
@@ -7,7 +7,7 @@ export default function SessionProvider() {
     const [, dispatch] = useGlobalState()
 
     useEffect(() => {
-        SUPABASE.auth
+        DB.auth()
             .getSession()
             .then(({data: {session}}) => {
                 setSession(dispatch, session)
@@ -15,7 +15,7 @@ export default function SessionProvider() {
 
         const {
             data: {subscription},
-        } = SUPABASE.auth
+        } = DB.auth()
             .onAuthStateChange((_event, session) => {
                 setSession(dispatch, session)
             })

@@ -3,7 +3,7 @@
 import React, {useEffect, useState} from "react"
 import {Button, Col, Container, Form, Image, Row} from "react-bootstrap"
 import {useNavigate} from "react-router-dom"
-import {SUPABASE} from "../../index"
+import {DB} from "../../index"
 import {signOut} from "../../lib/auth/auth"
 import {App, Strings} from "../../lib/consts"
 import {getSession, useGlobalState} from "../../lib/context"
@@ -17,7 +17,7 @@ export default function ProfilePage() {
     const navigate = useNavigate()
 
     const [loading, setLoading] = useState(true)
-    const [picture, setPicture] = useState(null)
+    const [avatarURL, setAvatarURL] = useState("")
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
@@ -35,9 +35,9 @@ export default function ProfilePage() {
             console.log("getProfile", session)
             const {user} = session
 
-            const {data, error} = await SUPABASE
-                .from("profiles")
-                .select("name, phone, picture")
+            //Query profile data
+            const {data, error} = await DB.profiles()
+                .select("name, phone, avatar_url")
                 .eq("id", user.id)
                 .single()
 
@@ -47,7 +47,7 @@ export default function ProfilePage() {
                     return
                 } else if (data) {
                     //TODO 25.12.2023: Add picture as URL
-                    //setPicture(data.picture)
+                    setAvatarURL(data.avatar_url)
                     setName(data.name)
                     setEmail(user.email)
                     setPhone(data.phone)
@@ -67,25 +67,28 @@ export default function ProfilePage() {
         event.preventDefault()
 
         setLoading(true)
+
         const {user} = session
 
         const updates = {
             updated_at: new Date(),
-            picture,
-            name,
-            phone,
+            avatar_url: avatarURL,
+            name: name,
+            phone: phone,
         }
 
-        const {error} = await SUPABASE
-            .from("profiles")
+        //Update profile data
+        const {error} = await DB.profiles()
             .update(updates)
             .eq("id", user.id)
 
         if (error) {
             alert(error.message)
         } else {
-            //TODO 25.12.2023: setPictureURL(pictureURL)
+            //TODO 26.12.2023: What???
+            //setAvatar(avatarURL)
         }
+
         setLoading(false)
     }
 
@@ -97,7 +100,7 @@ export default function ProfilePage() {
         if (file) {
             const reader = new FileReader()
             reader.onloadend = () => {
-                //setPicture(reader.result)
+                //setAvatar(reader.result)
             }
             reader.readAsDataURL(file)
         }
@@ -114,7 +117,7 @@ export default function ProfilePage() {
                                     className="user-select-all">
                             <Image className="rounded-circle mb-3 profile-picture"
                                    alt="Профільне фото"
-                                   src={picture || "https://via.placeholder.com/150"}/>
+                                   src={avatarURL || "https://via.placeholder.com/150"}/>
 
                             <Form.Control id="pictureControl"
                                           type="file"

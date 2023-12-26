@@ -1,14 +1,14 @@
-import {createClient} from "@supabase/supabase-js"
 import React from "react"
 import ReactDOM from "react-dom/client"
 import "./style/index.scss"
 import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom"
 import SessionProvider from "./lib/auth/SessionProvider"
-import {App, Supabase} from "./lib/consts"
-import {GlobalStateProvider, useGlobalState} from "./lib/context"
+import {App} from "./lib/consts"
+import {GlobalStateProvider} from "./lib/context"
 import ThemeProvider from "./lib/theme/ThemeProvider"
 import AboutPage from "./page/AboutPage"
 import AuthPage from "./page/auth/AuthPage"
+import DatabaseManager from "./page/db"
 import ErrorPage from "./page/ErrorPage"
 import HomePage from "./page/HomePage"
 import RootLayout from "./page/RootLayout"
@@ -17,7 +17,7 @@ import ProfilePage from "./page/user/ProfilePage"
 import reportWebVitals from "./test/reportWebVitals"
 
 
-export const SUPABASE = createClient(Supabase.URL, Supabase.KEY)
+export const DB = new DatabaseManager()
 
 
 const router = createBrowserRouter([{
