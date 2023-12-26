@@ -1,12 +1,10 @@
-// noinspection JSUnresolvedReference
-
 import React, {useEffect, useState} from "react"
 import {Button, Col, Container, Form, Row} from "react-bootstrap"
 import {useNavigate} from "react-router-dom"
 import {DB} from "../../index"
-import {signOut} from "../../lib/db/auth/auth"
 import {App, Strings} from "../../lib/consts"
 import {getSession, useGlobalState} from "../../lib/context"
+import {signOut} from "../../lib/db/auth/auth"
 import {Log} from "../../lib/log"
 import Avatar from "./Avatar"
 
@@ -28,8 +26,6 @@ export default function ProfilePage() {
         if (!session)
             return navigate(App.AUTH)
 
-        Log.v("Preparing getting user profile")
-
         let ignore = false
 
         async function getProfile() {
@@ -50,9 +46,12 @@ export default function ProfilePage() {
                     setLoading(false)
                     return
                 } else if (data) {
+                    // noinspection JSUnresolvedReference
                     setAvatarURL(data.avatar_url)
+                    // noinspection JSUnresolvedReference
                     setName(data.name)
                     setEmail(user.email)
+                    // noinspection JSUnresolvedReference
                     setPhone(data.phone)
                 }
             }
