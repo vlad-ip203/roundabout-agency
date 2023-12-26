@@ -1,4 +1,4 @@
-import {useEffect} from "react"
+import {useEffect, useRef} from "react"
 import {getAppTheme, listenSystemThemeChanges, useGlobalState} from "../context"
 
 
@@ -8,7 +8,12 @@ export default function ThemeProvider() {
     const theme = getAppTheme(state)
     document.documentElement.setAttribute("data-bs-theme", theme)
 
+    //Apply listener only once
+    let ignore = useRef(false)
     useEffect(() => {
-        listenSystemThemeChanges(state, dispatch)
-    }, [dispatch, state])
+        if (!ignore.current) {
+            ignore.current = true
+            listenSystemThemeChanges(state, dispatch)
+        }
+    }, [dispatch, ignore, state])
 }
