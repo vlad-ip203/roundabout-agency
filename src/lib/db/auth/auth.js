@@ -1,6 +1,8 @@
 import {DB} from "../../../index"
+import {reload} from "../../context"
 
 
-export function signOut() {
-    void DB.authClient().signOut()
+export async function signOut() {
+    await DB.authClient().signOut()
+    reload()
 }

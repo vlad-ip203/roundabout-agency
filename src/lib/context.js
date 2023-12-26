@@ -1,5 +1,3 @@
-// noinspection JSUnresolvedReference
-
 import {Session} from "@supabase/supabase-js"
 import React from "react"
 import {Log} from "./log"
@@ -37,6 +35,8 @@ export const useGlobalState = () => [
 ]
 
 const notifyContextChanged = (dispatch) => dispatch({})
+
+export const reload = () => void window.location.reload()
 
 
 export function getSession(state): null | Session {
