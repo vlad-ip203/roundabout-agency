@@ -1,6 +1,6 @@
 import {useEffect} from "react"
-import {DB} from "../../index"
-import {setSession, useGlobalState} from "../context"
+import {DB} from "../../../index"
+import {setSession, useGlobalState} from "../../context"
 
 
 export default function SessionProvider() {

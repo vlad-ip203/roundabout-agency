@@ -1,4 +1,4 @@
-import {DB} from "../../index"
+import {DB} from "../../../index"
 
 
 export function signOut() {

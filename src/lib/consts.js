@@ -10,16 +10,16 @@ export class App {
 export class Strings {
     static SITE_NAME = "Розворот"
 
-    static NAV_HOME = "Головна"
-    static NAV_SEARCH = "Пошук"
-    static NAV_ABOUT = "Про нас"
-    static NAV_AUTH = "Вхід/Реєстрація"
-    static NAV_PROFILE = "Профіль"
-    static NAV_THEME = "Тема інтерфейсу"
-    static NAV_THEME_LIST = {
-        "system": "За вибором системи",
-        "light": "Світла",
-        "dark": "Темна",
+    static HOME = "Головна"
+    static SEARCH = "Пошук"
+    static ABOUT = "Про нас"
+    static AUTH = "Вхід/Реєстрація"
+    static PROFILE = "Профіль"
+    static THEME = "Тема інтерфейсу"
+    static THEME_LIST = {
+        system: "За вибором системи",
+        light: "Світла",
+        dark: "Темна",
     }
     static SIGN_OUT = "Вийти"
 }

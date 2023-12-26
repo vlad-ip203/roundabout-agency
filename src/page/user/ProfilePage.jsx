@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react"
 import {Button, Col, Container, Form, Row} from "react-bootstrap"
 import {useNavigate} from "react-router-dom"
 import {DB} from "../../index"
-import {signOut} from "../../lib/auth/auth"
+import {signOut} from "../../lib/db/auth/auth"
 import {App, Strings} from "../../lib/consts"
 import {getSession, useGlobalState} from "../../lib/context"
 import {Log} from "../../lib/log"
@@ -100,7 +100,7 @@ export default function ProfilePage() {
     const onPictureChange = (e, path) => setAvatarURL(path)
 
     return <>
-        <h2 className="fw-bold">{Strings.NAV_PROFILE}</h2>
+        <h2 className="fw-bold">{Strings.PROFILE}</h2>
 
         <Row>
             <Col md={{span: 6, offset: 3}}>

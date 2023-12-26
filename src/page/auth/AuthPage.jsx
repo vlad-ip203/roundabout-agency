@@ -23,7 +23,7 @@ export default function AuthPage() {
     }, [navigate, session])
 
     return <>
-        <h2 className="fw-bold">{Strings.NAV_AUTH}</h2>
+        <h2 className="fw-bold">{Strings.AUTH}</h2>
 
         <p>
             Створення акаунту дає можливість не тільки переглядати оголошення про нерухомість, а також відповідати на
