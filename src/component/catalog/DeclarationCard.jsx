@@ -1,13 +1,9 @@
-import {faDrawPolygon, faMapMarked} from "@fortawesome/free-solid-svg-icons"
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import React from "react"
 import {Card} from "react-bootstrap"
 
-
-export default function DeclarationCard({image_urls, title, summary, city, address, area}) {
+export default function DeclarationCard({declaration}) {
     return (
         <Card className="my-4">
-            <Card.Img variant="top"
+            {/*<Card.Img variant="top"
                       src={image_urls[0]}
                       alt={title}/>
 
@@ -27,7 +23,7 @@ export default function DeclarationCard({image_urls, title, summary, city, addre
                     {" "}
                     Площа: {area} м²
                 </Card.Text>
-            </Card.Body>
+            </Card.Body>*/}
         </Card>
     )
 }

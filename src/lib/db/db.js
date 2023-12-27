@@ -1,13 +1,15 @@
 import {createClient, SupabaseClient} from "@supabase/supabase-js"
 import {Log} from "../log"
+import {Declaration, Facility, Profile} from "./objects"
 
 
 const SERVER_URL = "https://mcqwnznlvqkexbxtxjdg.supabase.co"
 const SERVER_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1jcXduem5sdnFrZXhieHR4amRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDM0NTgzMTQsImV4cCI6MjAxOTAzNDMxNH0.eIL90ITkD7yuu_kvLBysQsJ9L2puWD2H4Ihlt-KY8Jw"
 
 
+const PRIMARY_KEY = "id"
+
 const PROFILES = "profiles"
-const PROFILES_ID = "id"
 const PROFILES_COLUMNS = "id,created_at,updated_at,name,phone,avatar_url"
 const AVATARS = "avatars"
 
@@ -51,19 +53,12 @@ export default class DatabaseManager {
             error,
         } = await this.#profiles()
             .select(PROFILES_COLUMNS)
-            .eq(PROFILES_ID, id)
+            .eq(PRIMARY_KEY, id)
             .single()
 
         const out = {
             error: "",
-            data: {
-                id: "",
-                created_at: "",
-                updated_at: "",
-                name: "",
-                phone: "",
-                avatar_url: "",
-            },
+            data: null,
         }
 
         if (error) {
@@ -72,12 +67,7 @@ export default class DatabaseManager {
             return out
         }
 
-        out.data.id = data.id
-        out.data.created_at = data.created_at
-        out.data.updated_at = data.updated_at
-        out.data.name = data.name
-        out.data.phone = data.phone
-        out.data.avatar_url = data.avatar_url
+        out.data = new Profile(data)
         return out
     }
 
@@ -86,7 +76,7 @@ export default class DatabaseManager {
             error,
         } = await this.#profiles()
             .update(updates)
-            .eq(PROFILES_ID, id)
+            .eq(PRIMARY_KEY, id)
 
         const out = {
             error: "",
@@ -156,7 +146,6 @@ export default class DatabaseManager {
             error,
         } = await this.#facilities()
             .select(FACILITIES_COLUMNS)
-            .limit(20)
 
         const out = {
             error: "",
@@ -169,9 +158,35 @@ export default class DatabaseManager {
             return out
         }
 
-        out.data = data
+        for (const i in data)
+            out.data.push(new Facility(data[i]))
         return out
     }
+
+    async getFacility(id) {
+        const {
+            data,
+            error,
+        } = await this.#facilities()
+            .select(FACILITIES_COLUMNS)
+            .eq(PRIMARY_KEY, id)
+            .single()
+
+        const out = {
+            error: "",
+            data: null,
+        }
+
+        if (error) {
+            out.error = "Error getting profile data: " + error.message
+            Log.w(out.error)
+            return out
+        }
+
+        out.data = new Facility(data)
+        return out
+    }
+
 
     #declarations() {
         return this._client.from(DECLARATIONS)
@@ -195,7 +210,8 @@ export default class DatabaseManager {
             return out
         }
 
-        out.data = data
-        return out
+        for (const i in data)
+            out.data.push(new Declaration(data[i]))
+        return data
     }
 }
