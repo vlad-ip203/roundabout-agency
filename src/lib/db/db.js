@@ -26,6 +26,10 @@ export default class DatabaseManager {
         return this._client.from("profiles")
     }
 
+    facilities() {
+        return this._client.from("facilities")
+    }
+
     avatars() {
         return this._client.storage.from("avatars")
     }

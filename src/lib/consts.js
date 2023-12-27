@@ -1,5 +1,6 @@
 export class App {
     static HOME = "/"
+    static CATALOG = "/catalog"
     static SEARCH = "/search"
     static ABOUT = "/about"
     static AUTH = "/auth"

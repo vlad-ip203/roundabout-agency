@@ -2,13 +2,14 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import "./style/index.scss"
 import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom"
-import SessionProvider from "./lib/db/auth/SessionProvider"
 import {App} from "./lib/consts"
 import {GlobalStateProvider} from "./lib/context"
+import SessionProvider from "./lib/db/auth/SessionProvider"
+import DatabaseManager from "./lib/db/db"
 import ThemeProvider from "./lib/theme/ThemeProvider"
 import AboutPage from "./page/AboutPage"
 import AuthPage from "./page/auth/AuthPage"
-import DatabaseManager from "./lib/db/db"
+import CatalogPage from "./page/catalog/CatalogPage"
 import ErrorPage from "./page/ErrorPage"
 import HomePage from "./page/HomePage"
 import RootLayout from "./page/RootLayout"
@@ -26,6 +27,7 @@ const router = createBrowserRouter([{
     errorElement: <RootLayout><ErrorPage/></RootLayout>,
     children: [
         {index: true, element: <HomePage/>},
+        {path: App.CATALOG, element: <CatalogPage/>},
         {path: App.SEARCH, element: <SearchPage/>},
         {path: App.ABOUT, element: <AboutPage/>},
         {path: App.AUTH, element: <AuthPage/>},
