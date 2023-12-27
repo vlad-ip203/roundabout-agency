@@ -1,6 +1,5 @@
 export class App {
     static HOME = "/"
-    static CATALOG_FACILITIES = "/facilities"
     static CATALOG = "/catalog"
     static SEARCH = "/search"
     static ABOUT = "/about"
@@ -12,7 +11,6 @@ export class Strings {
     static SITE_NAME = "Розворот"
 
     static HOME = "Головна"
-    static CATALOG_FACILITIES= "Нерухомість"
     static CATALOG = "Оголошення"
     static SEARCH = "Пошук"
     static ABOUT = "Про нас"
