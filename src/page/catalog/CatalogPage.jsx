@@ -6,14 +6,12 @@ import {Strings} from "../../lib/consts"
 import {MASONRY_BREAKPOINT_COLS} from "./config"
 
 
-//TODO 27.12.2023: Remove facilities catalog
 export default function FacilitiesCatalogPage() {
     const [content, setContent] = useState([])
 
     useEffect(() => {
-        console.log("Getting data")
-        async function getData() {
-            const {error, data} = await DB.getAllFacilities()
+        async function getProducts() {
+            const {error, data} = await DB.getAllDeclarations()
 
             if (error) {
                 //Notify user about a problem
@@ -22,7 +20,7 @@ export default function FacilitiesCatalogPage() {
                 setContent(data)
             }
         }
-        void getData()
+        void getProducts()
     }, [])
 
     return <>

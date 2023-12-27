@@ -28,9 +28,8 @@ const router = createBrowserRouter([{
     errorElement: <RootLayout><ErrorPage/></RootLayout>,
     children: [
         {index: true, element: <HomePage/>},
-        //TODO 27.12.2023: Remove facilities catalog
-        {path: "/facilities", element: <FacilitiesCatalogPage/>},
-        //{path: App.CATALOG, element: <CatalogPage/>},
+        {path: App.CATALOG_FACILITIES, element: <FacilitiesCatalogPage/>},
+        {path: App.CATALOG, element: <CatalogPage/>},
         {path: App.SEARCH, element: <SearchPage/>},
         {path: App.ABOUT, element: <AboutPage/>},
         {path: App.AUTH, element: <AuthPage/>},
