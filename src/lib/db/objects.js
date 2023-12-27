@@ -1,3 +1,6 @@
+import {DB} from "../../index"
+
+
 export class Profile {
     id: number
     created_at: string
@@ -49,6 +52,17 @@ export class Facility {
     }
 }
 
+export async function tryResolveFacility(id) {
+    if (!id)
+        return
+
+    const {error, data} = await DB.getFacility(id)
+
+    if (!error)
+        return new Facility(data)
+}
+
+
 export class Declaration {
     id: number
     issuer_id: string
@@ -57,6 +71,7 @@ export class Declaration {
     type: string
     title: string
     summary: string
+    open: boolean
 
     constructor(data) {
         this.id = data.id
@@ -67,18 +82,47 @@ export class Declaration {
         this.type = data.type
         this.title = data.title
         this.summary = data.summary
+        this.open = data.open
     }
 }
 
 export class ExchangeDeclaration extends Declaration {
     id: number
     facility_id: number
+    facility: Facility = null
     exchange_facility_id: number
+    exchange_facility: Facility = null
 
     constructor(data) {
         super(data)
         this.id = data.id
         this.facility_id = data.facility_id
         this.exchange_facility_id = data.exchange_facility_id
+    }
+}
+
+export class PurchaseDeclaration extends Declaration {
+    id: number
+    price: number
+    facility_id: number
+
+    constructor(data) {
+        super(data)
+        this.id = data.id
+        this.price = data.price
+        this.facility_id = data.facility_id
+    }
+}
+
+export class SaleDeclaration extends Declaration {
+    id: number
+    facility_id: number
+    price: number
+
+    constructor(data) {
+        super(data)
+        this.id = data.id
+        this.facility_id = data.facility_id
+        this.price = data.price
     }
 }

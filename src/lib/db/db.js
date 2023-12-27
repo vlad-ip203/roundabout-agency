@@ -1,6 +1,6 @@
 import {createClient, SupabaseClient} from "@supabase/supabase-js"
 import {Log} from "../log"
-import {Declaration, ExchangeDeclaration, Facility, Profile} from "./objects"
+import {Declaration, ExchangeDeclaration, Facility, Profile, PurchaseDeclaration, SaleDeclaration} from "./objects"
 
 
 const SERVER_URL = "https://mcqwnznlvqkexbxtxjdg.supabase.co"
@@ -17,7 +17,7 @@ const FACILITIES = "facilities"
 const FACILITIES_COLUMNS = "id,created_at,user_id,title,summary,description,city,address,location,area,type_size,type_usecase,image_urls"
 
 const DECLARATIONS = "declarations"
-const DECLARATIONS_COLUMNS = "id,created_at,issuer_id,consumer_id,evaluator_id,type,title,summary"
+const DECLARATIONS_COLUMNS = "id,created_at,issuer_id,consumer_id,evaluator_id,type,title,summary,open"
 const DECLARATIONS_EXCHANGE = "declarations_exchange"
 const DECLARATIONS_EXCHANGE_COLUMNS = "id,facility_id,exchange_facility_id"
 const DECLARATIONS_PURCHASE = "declarations_purchase"
@@ -270,6 +270,70 @@ export default class DatabaseManager {
         for (const i in data)
             out.data.push(new ExchangeDeclaration(data[i]))
         Log.v(`Returning ${out.data.length} exchange declarations`)
+        return out
+    }
+
+
+    #purchaseDeclarations() {
+        return this._client.from(DECLARATIONS_PURCHASE)
+    }
+
+    async getAllPurchaseDeclarations() {
+        const {
+            data,
+            error,
+        } = await this.#purchaseDeclarations()
+            .select(`
+                ${DECLARATIONS_PURCHASE_COLUMNS},
+                ${DECLARATIONS} ( ${DECLARATIONS_COLUMNS} )
+            `)
+
+        const out = {
+            error: "",
+            data: [],
+        }
+
+        if (error) {
+            out.error = "Error getting purchase declarations: " + error.message
+            Log.w(out.error)
+            return out
+        }
+
+        for (const i in data)
+            out.data.push(new PurchaseDeclaration(data[i]))
+        Log.v(`Returning ${out.data.length} purchase declarations`)
+        return out
+    }
+
+
+    #saleDeclarations() {
+        return this._client.from(DECLARATIONS_SALE)
+    }
+
+    async getAllSaleDeclarations() {
+        const {
+            data,
+            error,
+        } = await this.#saleDeclarations()
+            .select(`
+                ${DECLARATIONS_SALE_COLUMNS},
+                ${DECLARATIONS} ( ${DECLARATIONS_COLUMNS} )
+            `)
+
+        const out = {
+            error: "",
+            data: [],
+        }
+
+        if (error) {
+            out.error = "Error getting sale declarations: " + error.message
+            Log.w(out.error)
+            return out
+        }
+
+        for (const i in data)
+            out.data.push(new SaleDeclaration(data[i]))
+        Log.v(`Returning ${out.data.length} sale declarations`)
         return out
     }
 }

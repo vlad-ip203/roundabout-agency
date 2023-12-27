@@ -3,7 +3,7 @@ import {tryResolveFacility} from "../../lib/db/objects"
 import FacilityCard from "./FacilityCard"
 
 
-export default function ExchangeDeclarationCard({declaration}) {
+export default function SaleDeclarationCard({declaration}) {
     const [facility, setFacility] = useState(null)
 
     useEffect(() => {
@@ -13,11 +13,6 @@ export default function ExchangeDeclarationCard({declaration}) {
                     declaration.facility = value
                     setFacility(value)
                 })
-
-            await tryResolveFacility(declaration.exchange_facility_id)
-                .then(value => {
-                    declaration.exchange_facility = value
-                })
         }
         void resolveDeclaration()
     }, [declaration])
@@ -25,7 +20,7 @@ export default function ExchangeDeclarationCard({declaration}) {
     return <>
         {facility &&
             <FacilityCard facility={facility}
-                          className="declaration-exchange"/>
+                          className="declaration-sale"/>
         }
     </>
 }

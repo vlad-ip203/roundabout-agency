@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react"
 import {tryResolveFacility} from "../../lib/db/objects"
-import FacilityCard from "./FacilityCard"
 
 
-export default function ExchangeDeclarationCard({declaration}) {
+export default function PurchaseDeclarationCard({declaration}) {
     const [facility, setFacility] = useState(null)
 
     useEffect(() => {
@@ -13,19 +12,13 @@ export default function ExchangeDeclarationCard({declaration}) {
                     declaration.facility = value
                     setFacility(value)
                 })
-
-            await tryResolveFacility(declaration.exchange_facility_id)
-                .then(value => {
-                    declaration.exchange_facility = value
-                })
         }
         void resolveDeclaration()
     }, [declaration])
 
     return <>
         {facility &&
-            <FacilityCard facility={facility}
-                          className="declaration-exchange"/>
+            <p>{declaration.summary}</p>
         }
     </>
 }

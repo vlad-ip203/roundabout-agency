@@ -10,3 +10,16 @@ code {
 a {
     text-decoration: none !important;
 }
+
+
+.declaration-exchange {
+    background-color: #e5e4f6 !important;
+}
+
+.declaration-purchase {
+    background-color: #ddf5e7 !important;
+}
+
+.declaration-sale {
+    background-color: #f8e3e3 !important;
+}

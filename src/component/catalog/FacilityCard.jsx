@@ -4,10 +4,10 @@ import React from "react"
 import {Card} from "react-bootstrap"
 
 
-export default function FacilityCard({facility}) {
+export default function FacilityCard({facility, className}) {
     return <>
         {facility &&
-            <Card className="my-4">
+            <Card className={"my-4 " + className}>
                 <Card.Img variant="top"
                           src={facility.image_urls[0]}
                           alt={facility.title}/>
