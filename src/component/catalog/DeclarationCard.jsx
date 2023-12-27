@@ -4,7 +4,7 @@ import React from "react"
 import {Card} from "react-bootstrap"
 
 
-export default function PropertyCard({image_urls, title, summary, city, address, area}) {
+export default function DeclarationCard({image_urls, title, summary, city, address, area}) {
     return (
         <Card className="my-4">
             <Card.Img variant="top"

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import Masonry from "react-masonry-css"
-import FacilityCard from "../../component/FacilityCard"
+import FacilityCard from "../../component/catalog/FacilityCard"
 import {DB} from "../../index"
 import {Strings} from "../../lib/consts"
 import {MASONRY_BREAKPOINT_COLS} from "./config"
