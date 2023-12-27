@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react"
 import Masonry from "react-masonry-css"
-import PropertyCard from "../../component/FacilityCard"
+import FacilityCard from "../../component/FacilityCard"
 import {DB} from "../../index"
 import {Strings} from "../../lib/consts"
 import {Log} from "../../lib/log"
 import {MASONRY_BREAKPOINT_COLS} from "./config"
 
 
-export default function CatalogPage() {
+export default function FacilitiesCatalogPage() {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
@@ -34,7 +34,7 @@ export default function CatalogPage() {
                  className="masonry-grid"
                  columnClassName="masonry-grid-column">
             {products.map(item =>
-                <PropertyCard key={item.id}
+                <FacilityCard key={item.id}
                               {...item} />,
             )}
         </Masonry>

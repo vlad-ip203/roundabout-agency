@@ -10,6 +10,7 @@ import ThemeProvider from "./lib/theme/ThemeProvider"
 import AboutPage from "./page/AboutPage"
 import AuthPage from "./page/auth/AuthPage"
 import CatalogPage from "./page/catalog/CatalogPage"
+import FacilitiesCatalogPage from "./page/catalog/FacilitiesCatalogPage"
 import ErrorPage from "./page/ErrorPage"
 import HomePage from "./page/HomePage"
 import RootLayout from "./page/RootLayout"
@@ -27,7 +28,9 @@ const router = createBrowserRouter([{
     errorElement: <RootLayout><ErrorPage/></RootLayout>,
     children: [
         {index: true, element: <HomePage/>},
-        {path: App.CATALOG, element: <CatalogPage/>},
+        //TODO 27.12.2023: Remove facilities catalog
+        {path: "/facilities", element: <FacilitiesCatalogPage/>},
+        //{path: App.CATALOG, element: <CatalogPage/>},
         {path: App.SEARCH, element: <SearchPage/>},
         {path: App.ABOUT, element: <AboutPage/>},
         {path: App.AUTH, element: <AuthPage/>},
