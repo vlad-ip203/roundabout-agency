@@ -17,16 +17,16 @@ export default function Avatar({size, url, onUpload}) {
 
     async function downloadImage(path) {
         Log.i("Downloading image with URL: " + path)
-        const {data, error} = await DB.avatars()
-            .download(path)
+
+        const {error, url} = await DB.getAvatarUrl(path)
 
         if (error) {
-            Log.e("Error downloading image: " + error.message)
-            return
+            //Notify user about a problem
+            alert(error)
+        } else {
+            //Update profile properties
+            setAvatarUrl(url)
         }
-
-        const url = URL.createObjectURL(data)
-        setAvatarUrl(url)
     }
 
     async function uploadAvatar(event) {
@@ -48,16 +48,15 @@ export default function Avatar({size, url, onUpload}) {
         const path = `${user.id}/${fileName}`
 
         Log.i("Uploading image with URL: " + path)
-        const {error: uploadError} = await DB.avatars()
-            .upload(path, file)
+        const {error} = await DB.uploadAvatar(path, file)
 
-        if (uploadError) {
-            alert(uploadError.message)
-            setUploading(false)
-            return
+        if (error) {
+            //Notify user about a problem
+            alert(error)
+        } else {
+            //Update profile properties
+            onUpload(event, path)
         }
-
-        onUpload(event, path)
 
         setUploading(false)
     }

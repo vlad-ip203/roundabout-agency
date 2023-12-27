@@ -57,14 +57,13 @@ export default function NavMenu() {
 
             const {user} = session
 
-            const {data, error} = await DB.profiles()
-                .select("name")
-                .eq("id", user.id)
-                .single()
+            const {error, data} = await DB.getProfile(user.id)
 
             if (error) {
-                Log.w("Error getting profile data: " + error)
-            } else if (data) {
+                //Notify user about a problem
+                alert(error)
+            } else {
+                //Update profile properties
                 setProfile(data)
             }
         }

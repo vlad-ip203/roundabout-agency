@@ -3,7 +3,7 @@ import {Button, Col, Container, Form, Row} from "react-bootstrap"
 import {useNavigate} from "react-router-dom"
 import {DB} from "../../index"
 import {App, Strings} from "../../lib/consts"
-import {getSession, useGlobalState} from "../../lib/context"
+import {getSession, reload, useGlobalState} from "../../lib/context"
 import {signOut} from "../../lib/db/auth/auth"
 import {Log} from "../../lib/log"
 import Avatar from "./Avatar"
@@ -34,27 +34,19 @@ export default function ProfilePage() {
 
             const {user} = session
 
-            //Query profile data
-            const {data, error} = await DB.profiles()
-                .select("name, phone, avatar_url")
-                .eq("id", user.id)
-                .single()
+            const {error, data} = await DB.getProfile(user.id)
 
-            if (!ignore) {
+            if (!ignore)
                 if (error) {
-                    Log.w("Error getting profile data: " + error)
-                    setLoading(false)
-                    return
+                    //Notify user about a problem
+                    alert(error)
                 } else if (data) {
-                    // noinspection JSUnresolvedReference
+                    //Update profile properties
                     setAvatarURL(data.avatar_url)
-                    // noinspection JSUnresolvedReference
                     setName(data.name)
                     setEmail(user.email)
-                    // noinspection JSUnresolvedReference
                     setPhone(data.phone)
                 }
-            }
 
             setLoading(false)
         }
@@ -81,14 +73,14 @@ export default function ProfilePage() {
         }
 
         //Update profile data
-        const {error} = await DB.profiles()
-            .update(updates)
-            .eq("id", user.id)
-
+        const {error} = await DB.updateProfile(user.id, updates)
         if (error) {
-            alert(error.message)
+            //Notify user about a problem
+            alert(error)
         } else {
-            setAvatarURL(avatarURL)
+            //Update profile properties
+            //setAvatarURL(avatarURL)
+            reload()
         }
 
         setLoading(false)
