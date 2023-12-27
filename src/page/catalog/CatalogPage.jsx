@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import Masonry from "react-masonry-css"
-import DeclarationCard from "../../component/catalog/DeclarationCard"
+import ExchangeDeclarationCard from "../../component/catalog/ExchangeDeclarationCard"
 import {DB} from "../../index"
 import {Strings} from "../../lib/consts"
 import type {Declaration} from "../../lib/db/objects"
@@ -12,7 +12,7 @@ export default function CatalogPage() {
 
     useEffect(() => {
         async function getProducts() {
-            const {error, data} = await DB.getAllDeclarations()
+            const {error, data} = await DB.getAllExchangeDeclarations()
 
             if (error) {
                 //Notify user about a problem
@@ -23,8 +23,8 @@ export default function CatalogPage() {
                              className="masonry-grid"
                              columnClassName="masonry-grid-column">
                         {data.map(item =>
-                            <DeclarationCard key={item.id}
-                                             declaration={item}/>,
+                            <ExchangeDeclarationCard key={item.id}
+                                                     declaration={item}/>,
                         )}
                     </Masonry>
                 </>)

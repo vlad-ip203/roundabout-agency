@@ -69,3 +69,16 @@ export class Declaration {
         this.summary = data.summary
     }
 }
+
+export class ExchangeDeclaration extends Declaration {
+    id: number
+    facility_id: number
+    exchange_facility_id: number
+
+    constructor(data) {
+        super(data)
+        this.id = data.id
+        this.facility_id = data.facility_id
+        this.exchange_facility_id = data.exchange_facility_id
+    }
+}

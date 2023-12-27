@@ -1,6 +1,6 @@
 import {createClient, SupabaseClient} from "@supabase/supabase-js"
 import {Log} from "../log"
-import {Declaration, Facility, Profile} from "./objects"
+import {Declaration, ExchangeDeclaration, Facility, Profile} from "./objects"
 
 
 const SERVER_URL = "https://mcqwnznlvqkexbxtxjdg.supabase.co"
@@ -62,7 +62,7 @@ export default class DatabaseManager {
         }
 
         if (error) {
-            out.error = "Error getting profile data: " + error.message
+            out.error = "Error getting profile: " + error.message
             Log.w(out.error)
             return out
         }
@@ -83,7 +83,7 @@ export default class DatabaseManager {
         }
 
         if (error) {
-            out.error = "Error updating profile data: " + error.message
+            out.error = "Error updating profile: " + error.message
             Log.w(out.error)
         }
 
@@ -160,6 +160,7 @@ export default class DatabaseManager {
 
         for (const i in data)
             out.data.push(new Facility(data[i]))
+        Log.v(`Returning ${out.data.length} facilities`)
         return out
     }
 
@@ -178,7 +179,7 @@ export default class DatabaseManager {
         }
 
         if (error) {
-            out.error = "Error getting profile data: " + error.message
+            out.error = "Error getting facility: " + error.message
             Log.w(out.error)
             return out
         }
@@ -212,6 +213,63 @@ export default class DatabaseManager {
 
         for (const i in data)
             out.data.push(new Declaration(data[i]))
-        return data
+        Log.v(`Returning ${out.data.length} declarations`)
+        return out
+    }
+
+    async getDeclaration(id) {
+        const {
+            data,
+            error,
+        } = await this.#declarations()
+            .select(DECLARATIONS_COLUMNS)
+            .eq(PRIMARY_KEY, id)
+            .single()
+
+        const out = {
+            error: "",
+            data: null,
+        }
+
+        if (error) {
+            out.error = "Error getting declaration: " + error.message
+            Log.w(out.error)
+            return out
+        }
+
+        out.data = new Declaration(data)
+        return out
+    }
+
+
+    #exchangeDeclarations() {
+        return this._client.from(DECLARATIONS_EXCHANGE)
+    }
+
+    async getAllExchangeDeclarations() {
+        const {
+            data,
+            error,
+        } = await this.#exchangeDeclarations()
+            .select(`
+                ${DECLARATIONS_EXCHANGE_COLUMNS},
+                ${DECLARATIONS} ( ${DECLARATIONS_COLUMNS} )
+            `)
+
+        const out = {
+            error: "",
+            data: [],
+        }
+
+        if (error) {
+            out.error = "Error getting exchange declarations: " + error.message
+            Log.w(out.error)
+            return out
+        }
+
+        for (const i in data)
+            out.data.push(new ExchangeDeclaration(data[i]))
+        Log.v(`Returning ${out.data.length} exchange declarations`)
+        return out
     }
 }
