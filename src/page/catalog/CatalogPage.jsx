@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react"
 import Masonry from "react-masonry-css"
-import FacilityCard from "../../component/catalog/FacilityCard"
+import DeclarationCard from "../../component/catalog/DeclarationCard"
 import {DB} from "../../index"
 import {Strings} from "../../lib/consts"
 import {MASONRY_BREAKPOINT_COLS} from "./config"
 
 
-export default function FacilitiesCatalogPage() {
+export default function CatalogPage() {
     const [content, setContent] = useState([])
 
     useEffect(() => {
@@ -30,8 +30,8 @@ export default function FacilitiesCatalogPage() {
                  className="masonry-grid"
                  columnClassName="masonry-grid-column">
             {content.map(item =>
-                <FacilityCard key={item.id}
-                              {...item} />,
+                <DeclarationCard key={item.id}
+                                 {...item} />,
             )}
         </Masonry>
     </>
