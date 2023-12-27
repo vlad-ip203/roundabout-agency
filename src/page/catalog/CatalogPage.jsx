@@ -13,8 +13,8 @@ export default function CatalogPage() {
     useEffect(() => {
         async function getProducts() {
             const {data, error} = await DB.facilities()
-                .select("id, user_id, title, summary, description, address, location, area, type_usecase, type_size, image_urls")
-                .limit(20)
+                .select("id, user_id, title, summary, description, city, address, location, area, type_usecase, type_size, image_urls")
+            //.limit(20)
 
             if (error) {
                 Log.w("Error getting profile data: " + error)

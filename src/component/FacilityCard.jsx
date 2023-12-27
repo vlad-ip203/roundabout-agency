@@ -4,7 +4,7 @@ import React from "react"
 import {Card} from "react-bootstrap"
 
 
-export default function PropertyCard({image_urls, title, summary, address, area}) {
+export default function PropertyCard({image_urls, title, summary, city, address, area}) {
     return (
         <Card className="my-4">
             <Card.Img variant="top"
@@ -20,7 +20,7 @@ export default function PropertyCard({image_urls, title, summary, address, area}
                     <FontAwesomeIcon icon={faMapMarked}
                                      width={28}/>
                     {" "}
-                    Адреса: {address}
+                    Адреса: {address}, {city}
                     <br/>
                     <FontAwesomeIcon icon={faDrawPolygon}
                                      width={28}/>
