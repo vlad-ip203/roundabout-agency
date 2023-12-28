@@ -94,7 +94,7 @@ export class ExchangeDeclaration extends Declaration {
     exchange_facility: Facility = null
 
     constructor(data) {
-        super(data)
+        super(data.declarations)
         this.id = data.id
         this.facility_id = data.facility_id
         this.exchange_facility_id = data.exchange_facility_id
@@ -105,9 +105,10 @@ export class PurchaseDeclaration extends Declaration {
     id: number
     price: number
     facility_id: number
+    facility: Facility = null
 
     constructor(data) {
-        super(data)
+        super(data.declarations)
         this.id = data.id
         this.price = data.price
         this.facility_id = data.facility_id
@@ -117,10 +118,11 @@ export class PurchaseDeclaration extends Declaration {
 export class SaleDeclaration extends Declaration {
     id: number
     facility_id: number
+    facility: Facility = null
     price: number
 
     constructor(data) {
-        super(data)
+        super(data.declarations)
         this.id = data.id
         this.facility_id = data.facility_id
         this.price = data.price

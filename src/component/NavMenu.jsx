@@ -91,11 +91,11 @@ export default function NavMenu() {
 
                     <Nav className="ms-auto">
                         {!profile &&
-                            <Link className="nav-link" to={App.AUTH}>{Strings.AUTH}</Link>
+                            <Link className="nav-link fw-bold" to={App.AUTH}>{Strings.AUTH}</Link>
                         }
 
                         {profile &&
-                            <NavDropdown title={profile.name || "Профіль користувача"}>
+                            <NavDropdown className="fw-bold" title={profile.name || "Профіль користувача"}>
                                 <Link className="dropdown-item" to={App.PROFILE}>{Strings.PROFILE}</Link>
                                 <Link className="dropdown-item" to={App.HOME}
                                       onClick={signOut}>{Strings.SIGN_OUT}</Link>

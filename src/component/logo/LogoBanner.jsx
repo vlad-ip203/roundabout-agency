@@ -13,7 +13,7 @@ export default function LogoBanner() {
         <h5 className="text-primary-emphasis fw-bold">Агентство нерухомості</h5>
 
         <p>
-            Продаж / Оренда / Купівля / Обмін
+            Продаж / Обмін / Купівля
             <br/>
             та інші операції з нерухомістю
         </p>
