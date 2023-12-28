@@ -95,8 +95,10 @@ export default function NavMenu() {
                         }
 
                         {profile &&
-                            <NavDropdown className="fw-bold" title={profile.name || "Профіль користувача"}>
-                                <Link className="dropdown-item" to={App.PROFILE}>{Strings.PROFILE}</Link>
+                            <NavDropdown className="fw-bold" title={profile.name || "Мій Акаунт"}>
+                                <Link className="dropdown-item" to={App.USER_PROFILE}>{Strings.USER_PROFILE}</Link>
+                                <Link className="dropdown-item"
+                                      to={App.USER_DECLARATIONS}>{Strings.USER_DECLARATIONS}</Link>
                                 <Link className="dropdown-item" to={App.HOME}
                                       onClick={signOut}>{Strings.SIGN_OUT}</Link>
                             </NavDropdown>

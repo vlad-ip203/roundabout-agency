@@ -4,7 +4,8 @@ export class App {
     static SEARCH = "/search"
     static ABOUT = "/about"
     static AUTH = "/auth"
-    static PROFILE = "/profile"
+    static USER_PROFILE = "/user/profile"
+    static USER_DECLARATIONS = "/user/declarations"
 }
 
 export class Strings {
@@ -15,6 +16,7 @@ export class Strings {
     static SEARCH = "Пошук"
     static ABOUT = "Про нас"
     static AUTH = "Вхід/Реєстрація"
-    static PROFILE = "Профіль"
+    static USER_PROFILE = "Профіль"
+    static USER_DECLARATIONS = "Оголошення"
     static SIGN_OUT = "Вийти"
 }

@@ -9,7 +9,7 @@ import {Log} from "../../lib/log"
 import Avatar from "./Avatar"
 
 
-export default function ProfilePage() {
+export default function UserProfilePage() {
     const [state] = useGlobalState()
     const session = getSession(state)
 
@@ -29,7 +29,6 @@ export default function ProfilePage() {
         let ignore = false
 
         async function getProfile() {
-            Log.v("Getting user profile for ProfilePage")
             setLoading(true)
 
             const {user} = session
@@ -91,7 +90,7 @@ export default function ProfilePage() {
     const onPictureChange = (e, path) => setAvatarURL(path)
 
     return <>
-        <h2 className="fw-bold">{Strings.PROFILE}</h2>
+        <h2 className="fw-bold">{Strings.USER_PROFILE}</h2>
 
         <Row>
             <Col md={{span: 6, offset: 3}}>

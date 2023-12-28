@@ -2,19 +2,20 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import "./style/index.scss"
 import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom"
+import AboutPage from "./component/AboutPage"
+import AuthPage from "./component/auth/AuthPage"
+import DeclarationsCatalogPage from "./component/catalog/DeclarationsCatalogPage"
+import ErrorPage from "./component/ErrorPage"
+import HomePage from "./component/HomePage"
+import RootLayout from "./component/layout/RootLayout"
+import SearchPage from "./component/SearchPage"
+import UserDeclarationsPage from "./component/user/UserDeclarationsPage"
+import UserProfilePage from "./component/user/UserProfilePage"
 import {App} from "./lib/consts"
 import {GlobalStateProvider} from "./lib/context"
 import SessionProvider from "./lib/db/auth/SessionProvider"
 import DatabaseManager from "./lib/db/manager"
 import ThemeProvider from "./lib/theme/ThemeProvider"
-import AboutPage from "./component/AboutPage"
-import AuthPage from "./component/auth/AuthPage"
-import CatalogPage from "./component/catalog/CatalogPage"
-import ErrorPage from "./component/ErrorPage"
-import HomePage from "./component/HomePage"
-import RootLayout from "./component/layout/RootLayout"
-import SearchPage from "./component/SearchPage"
-import ProfilePage from "./component/user/ProfilePage"
 import reportWebVitals from "./test/reportWebVitals"
 
 
@@ -27,11 +28,12 @@ const router = createBrowserRouter([{
     errorElement: <RootLayout><ErrorPage/></RootLayout>,
     children: [
         {index: true, element: <HomePage/>},
-        {path: App.CATALOG, element: <CatalogPage/>},
+        {path: App.CATALOG, element: <DeclarationsCatalogPage/>},
         {path: App.SEARCH, element: <SearchPage/>},
         {path: App.ABOUT, element: <AboutPage/>},
         {path: App.AUTH, element: <AuthPage/>},
-        {path: App.PROFILE, element: <ProfilePage/>},
+        {path: App.USER_PROFILE, element: <UserProfilePage/>},
+        {path: App.USER_DECLARATIONS, element: <UserDeclarationsPage/>},
     ],
 }])
 
