@@ -17,7 +17,9 @@
     "react-dom": "^18.2.0",
     "react-masonry-css": "^1.0.16",
     "react-router-dom": "^6.21.1",
-    "sass": "^1.69.5"
+    "react-slick": "^0.29.0",
+    "sass": "^1.69.5",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
