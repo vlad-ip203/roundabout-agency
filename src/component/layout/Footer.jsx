@@ -1,8 +1,8 @@
 import React from "react"
 import {Col, Container, Row} from "react-bootstrap"
 import {Link} from "react-router-dom"
-import {App, Strings} from "../lib/consts"
-import LogoBanner from "./logo/LogoBanner"
+import {App, Strings} from "../../lib/consts"
+import LogoBanner from "../logo/LogoBanner"
 
 
 export default function Footer() {

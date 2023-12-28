@@ -1,6 +1,6 @@
 import {Container} from "react-bootstrap"
-import Footer from "../component/Footer"
-import Header from "../component/Header"
+import Footer from "./Footer"
+import Header from "./Header"
 
 
 export default function RootLayout({children}) {
