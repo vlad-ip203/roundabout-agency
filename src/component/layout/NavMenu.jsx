@@ -7,6 +7,7 @@ import {DB} from "../../index"
 import {App, Strings} from "../../lib/consts"
 import {getSession, getTheme, setTheme, useGlobalState} from "../../lib/context"
 import {signOut} from "../../lib/db/auth/auth"
+import {ProfileRole} from "../../lib/db/objects"
 import {Log} from "../../lib/log"
 import {THEME_DARK, THEME_LIGHT, THEME_SYSTEM} from "../../lib/theme/consts"
 import Logo from "../logo/Logo"
@@ -99,12 +100,22 @@ export default function NavMenu() {
                                 <Link className="dropdown-item" to={App.USER_PROFILE}>
                                     {Strings.USER_PROFILE}
                                 </Link>
-                                <Link className="dropdown-item" to={App.USER_FACILITIES}>
-                                    {Strings.USER_FACILITIES}
-                                </Link>
-                                <Link className="dropdown-item" to={App.USER_DECLARATIONS}>
-                                    {Strings.USER_DECLARATIONS}
-                                </Link>
+
+                                {profile.role === ProfileRole.USER && <>
+                                    <Link className="dropdown-item" to={App.USER_FACILITIES}>
+                                        {Strings.USER_FACILITIES}
+                                    </Link>
+                                    <Link className="dropdown-item" to={App.USER_DECLARATIONS}>
+                                        {Strings.USER_DECLARATIONS}
+                                    </Link>
+                                </>}
+
+                                {profile.role === ProfileRole.EVALUATOR && <>
+                                    <Link className="dropdown-item" to={App.EVALUATOR_DECLARATIONS}>
+                                        {Strings.EVALUATOR_DECLARATIONS}
+                                    </Link>
+                                </>}
+
                                 <Link className="dropdown-item" to={App.HOME} onClick={signOut}>
                                     {Strings.SIGN_OUT}
                                 </Link>

@@ -28,9 +28,9 @@ export default function FacilitiesCatalogPage({userFilter = "all"}) {
     useEffect(() => {
         if (facilities) {
             setContent(facilities
+                .filter(f => userFilter === "all" || f.user_id === userFilter)
                 .filter(f => cityFilter === "all" || f.city === cityFilter)
                 .filter(f => usecaseFilter === "all" || f.type_usecase === usecaseFilter)
-                .filter(f => userFilter === "all" || f.user_id === userFilter)
                 .map(f => <FacilityCard key={f.id} facility={f}/>))
         } else {
             //List is empty, no data

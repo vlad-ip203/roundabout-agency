@@ -10,6 +10,7 @@ import NotFoundPage from "./component/error/NotFoundPage"
 import HomePage from "./component/HomePage"
 import RootLayout from "./component/layout/RootLayout"
 import SearchPage from "./component/SearchPage"
+import EvaluatorDeclarationsCatalogPage from "./component/user/EvaluatorDeclarationsCatalogPage"
 import UserContentCatalogPage, {ContentType} from "./component/user/UserContentCatalogPage"
 import UserProfilePage from "./component/user/UserProfilePage"
 import {App} from "./lib/consts"
@@ -38,6 +39,7 @@ const router = createBrowserRouter([{
         {path: App.USER_PROFILE, element: <UserProfilePage/>},
         {path: App.USER_FACILITIES, element: <UserContentCatalogPage contentType={ContentType.FACILITIES}/>},
         {path: App.USER_DECLARATIONS, element: <UserContentCatalogPage contentType={ContentType.DECLARATIONS}/>},
+        {path: App.EVALUATOR_DECLARATIONS, element: <EvaluatorDeclarationsCatalogPage/>},
     ],
 }])
 

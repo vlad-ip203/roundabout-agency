@@ -6,21 +6,29 @@ export class App {
     static SEARCH = "/search"
     static ABOUT = "/about"
     static AUTH = "/auth"
+
     static USER_PROFILE = "/user/profile"
     static USER_FACILITIES = "/user/facilities"
     static USER_DECLARATIONS = "/user/declarations"
+
+    static EVALUATOR_DECLARATIONS = "/evaluator/declarations"
 }
 
 export class Strings {
     static SITE_NAME = "Розворот"
 
     static HOME = "Головна"
+
     static CATALOG = "Оголошення"
     static SEARCH = "Пошук"
     static ABOUT = "Про нас"
     static AUTH = "Вхід/Реєстрація"
+
     static USER_PROFILE = "Профіль"
     static USER_FACILITIES = "Моя нерухомість"
     static USER_DECLARATIONS = "Мої оголошення"
+
+    static EVALUATOR_DECLARATIONS = "Розгляд та оцінка декларацій"
+
     static SIGN_OUT = "Вийти"
 }

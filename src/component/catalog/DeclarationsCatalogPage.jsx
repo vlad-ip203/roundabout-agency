@@ -36,7 +36,10 @@ function getDeclarationCard(declaration) {
     return <></>
 }
 
-export default function DeclarationsCatalogPage({userFilter = "all"}) {
+export default function DeclarationsCatalogPage({
+    userFilter = "all",
+    evaluatorModeFilter = false,
+}) {
     const [declarations, setDeclarations] = useState([])
     const [typeFilter, setTypeFilter] = useState(TypeFilter.SALE)
     const [cityFilter, setCityFilter] = useState("all")
@@ -53,16 +56,24 @@ export default function DeclarationsCatalogPage({userFilter = "all"}) {
     useEffect(() => {
         if (declarations) {
             setContent(declarations
+                .filter(d => userFilter === "all" || d.issuer_id === userFilter)
+                .filter(d => !evaluatorModeFilter || !d.evaluator_id)
                 .filter(d => typeFilter === TypeFilter.UNSET || d.type === typeFilter)
                 .filter(d => cityFilter === "all" || (d.facility && d.facility.city === cityFilter))
                 .filter(d => usecaseFilter === "all" || (d.facility && d.facility.type_usecase === usecaseFilter))
-                .filter(d => userFilter === "all" || d.issuer_id === userFilter)
                 .map(getDeclarationCard))
         } else {
             //List is empty, no data
             setContent([])
         }
-    }, [cityFilter, declarations, typeFilter, usecaseFilter, userFilter])
+    }, [
+        cityFilter,
+        declarations,
+        evaluatorModeFilter,
+        typeFilter,
+        usecaseFilter,
+        userFilter,
+    ])
 
     function handleTypeFilterChange(type) {
         setTypeFilter(type)
