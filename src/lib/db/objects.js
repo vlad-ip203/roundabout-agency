@@ -1,3 +1,10 @@
+export const ProfileRole = {
+    USER: "user",
+    EVALUATOR: "evaluator",
+    MANAGER: "manager",
+    ADMIN: "admin",
+}
+
 export class Profile {
     id: number
     created_at: string
@@ -5,6 +12,7 @@ export class Profile {
     name: string
     phone: string
     avatar_url: string
+    role: string
 
     constructor(data) {
         this.id = data.id
@@ -13,6 +21,7 @@ export class Profile {
         this.name = data.name
         this.phone = data.phone
         this.avatar_url = data.avatar_url
+        this.role = data.role
     }
 }
 

@@ -10,7 +10,7 @@ const SERVER_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 const PRIMARY_KEY = "id"
 
 const PROFILES = "profiles"
-const PROFILES_COLUMNS = "id,created_at,updated_at,name,phone,avatar_url"
+const PROFILES_COLUMNS = "id,created_at,updated_at,name,phone,avatar_url,role"
 const AVATARS = "avatars"
 
 const FACILITIES = "facilities"
