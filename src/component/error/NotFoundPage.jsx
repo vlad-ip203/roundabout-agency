@@ -1,8 +1,8 @@
 import {Link, useRouteError} from "react-router-dom"
-import {App} from "../lib/consts"
+import {App} from "../../lib/consts"
 
 
-export default function ErrorPage() {
+export default function NotFoundPage() {
     const error = useRouteError()
     console.error(error)
 

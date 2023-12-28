@@ -5,7 +5,8 @@ import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom"
 import AboutPage from "./component/AboutPage"
 import AuthPage from "./component/auth/AuthPage"
 import DeclarationsCatalogPage from "./component/catalog/DeclarationsCatalogPage"
-import ErrorPage from "./component/ErrorPage"
+import ForbiddenPage from "./component/error/ForbiddenPage"
+import NotFoundPage from "./component/error/NotFoundPage"
 import HomePage from "./component/HomePage"
 import RootLayout from "./component/layout/RootLayout"
 import SearchPage from "./component/SearchPage"
@@ -25,9 +26,11 @@ export const DB = new DatabaseManager()
 const router = createBrowserRouter([{
     path: App.HOME,
     element: <RootLayout><Outlet/></RootLayout>,
-    errorElement: <RootLayout><ErrorPage/></RootLayout>,
+    errorElement: <RootLayout><NotFoundPage/></RootLayout>,
     children: [
         {index: true, element: <HomePage/>},
+        {path: App.ERROR_FORBIDDEN, element: <ForbiddenPage/>},
+
         {path: App.CATALOG, element: <DeclarationsCatalogPage/>},
         {path: App.SEARCH, element: <SearchPage/>},
         {path: App.ABOUT, element: <AboutPage/>},

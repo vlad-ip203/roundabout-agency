@@ -1,5 +1,7 @@
 export class App {
     static HOME = "/"
+    static ERROR_FORBIDDEN = "/forbidden"
+
     static CATALOG = "/catalog"
     static SEARCH = "/search"
     static ABOUT = "/about"
