@@ -17,6 +17,6 @@ export class Strings {
     static ABOUT = "Про нас"
     static AUTH = "Вхід/Реєстрація"
     static USER_PROFILE = "Профіль"
-    static USER_DECLARATIONS = "Оголошення"
+    static USER_DECLARATIONS = "Мої оголошення"
     static SIGN_OUT = "Вийти"
 }

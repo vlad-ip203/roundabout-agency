@@ -34,12 +34,12 @@ function getDeclarationCard(declaration) {
     return <></>
 }
 
-export default function DeclarationsCatalogPage() {
+export default function DeclarationsCatalogPage({userFilter = "all"}) {
     const [declarations, setDeclarations] = useState([])
     const [typeFilter, setTypeFilter] = useState(TypeFilter.SALE)
     const [cityFilter, setCityFilter] = useState("all")
     const [usecaseFilter, setUsecaseFilter] = useState("all")
-    const [content, setContent] = useState("loading")
+    const [content, setContent] = useState([])
 
     useEffect(() => {
         async function loadData() {
@@ -51,15 +51,16 @@ export default function DeclarationsCatalogPage() {
     useEffect(() => {
         if (declarations) {
             setContent(declarations
-                .filter(d => d.type === typeFilter || typeFilter === TypeFilter.UNSET)
-                .filter(d => (d.facility && d.facility.city === cityFilter) || cityFilter === "all")
-                .filter(d => (d.facility && d.facility.type_usecase === usecaseFilter) || usecaseFilter === "all")
+                .filter(d => typeFilter === TypeFilter.UNSET || d.type === typeFilter)
+                .filter(d => cityFilter === "all" || (d.facility && d.facility.city === cityFilter))
+                .filter(d => usecaseFilter === "all" || (d.facility && d.facility.type_usecase === usecaseFilter))
+                .filter(d => userFilter === "all" || d.issuer_id === userFilter)
                 .map(getDeclarationCard))
         } else {
             //List is empty, no data
-            setContent("empty")
+            setContent([])
         }
-    }, [cityFilter, declarations, typeFilter, usecaseFilter])
+    }, [cityFilter, declarations, typeFilter, usecaseFilter, userFilter])
 
     function handleTypeFilterChange(filter) {
         setTypeFilter(filter)
@@ -67,22 +68,20 @@ export default function DeclarationsCatalogPage() {
         Log.i(`Applying filters: type=${typeFilter}`)
     }
 
-    /*function handleFilterChange(city, usecase) {
-        Log.i(`Applying filters in callback: city=${city}, usecase=${usecase}`)
-
-        setCityFilter(city)
-        setUsecaseFilter(usecase)
-    }*/
-
     return <>
-        <h2 className="mb-3 fw-bold">{
-            typeFilter === TypeFilter.EXCHANGE ? "Обмін нерухомості" :
+        <h2 className="mb-3 fw-bold">
+            {typeFilter === TypeFilter.EXCHANGE ? "Обмін нерухомості" :
                 typeFilter === TypeFilter.PURCHASE ? "Покупка нерухомості" :
                     typeFilter === TypeFilter.SALE ? "Продаж нерухомості" :
-                        "Всі оголошення"
-        }</h2>
+                        "Всі оголошення"}
+        </h2>
+        <h4>
+            {userFilter === "all" ?
+                "Всі оголошення на сайті" :
+                "Мої оголошення"}
+        </h4>
 
-        <Container className="mb-4">
+        <Container className="my-4">
             <ButtonGroup className="w-100">
                 <Button type="radio" onClick={() => handleTypeFilterChange("sale")}>Продаж</Button>
                 <Button type="radio" onClick={() => handleTypeFilterChange("exchange")}>Обмін</Button>

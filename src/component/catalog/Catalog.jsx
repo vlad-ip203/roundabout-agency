@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import {Col, Row} from "react-bootstrap"
 import Masonry from "react-masonry-css"
 import {Log} from "../../lib/log"
@@ -11,7 +11,23 @@ export default function Catalog({
     cityFilterChangeListener,
     usecaseFilterChangeListener,
 }) {
-    Log.i(`Showing ${content ? content.length : "undefined amount of"} items`)
+    const [output, setOutput] = useState("")
+
+    useEffect(() => {
+        if (!content || !content.length) {
+            setOutput("Нічого не знайдено, спробуйте інші фільтри")
+        } else {
+            Log.i(`Showing ${content ? content.length : "undefined amount of"} items`)
+
+            setOutput(<>
+                <Masonry breakpointCols={MASONRY_BREAKPOINT_COLS}
+                         className="masonry-grid"
+                         columnClassName="masonry-grid-column">
+                    {content}
+                </Masonry>
+            </>)
+        }
+    }, [content])
 
     return <>
         <Row>
@@ -21,13 +37,7 @@ export default function Catalog({
             </Col>
 
             <Col md={9}>
-                <Masonry breakpointCols={MASONRY_BREAKPOINT_COLS}
-                         className="masonry-grid"
-                         columnClassName="masonry-grid-column">
-                    {content === "loading" ? "Завантаження..." :
-                        content === "empty" ? "Нічого не знайдено, спробуйте інші фільтри" :
-                            content}
-                </Masonry>
+                {output}
             </Col>
         </Row>
     </>
