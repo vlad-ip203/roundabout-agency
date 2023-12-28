@@ -1,5 +1,6 @@
 import {Session} from "@supabase/supabase-js"
 import React from "react"
+import type {Profile} from "./db/objects"
 import {Log} from "./log"
 import {getStoredTheme, setStoredTheme} from "./storage"
 import {THEME_DARK, THEME_LIGHT, THEME_SYSTEM} from "./theme/consts"
@@ -7,6 +8,7 @@ import {THEME_DARK, THEME_LIGHT, THEME_SYSTEM} from "./theme/consts"
 
 const defaultGlobalState = {
     session: null,
+    session_profile: null,
     theme: getStoredTheme(),
 }
 
@@ -44,6 +46,14 @@ export function getSession(state): null | Session {
 }
 export function setSession(dispatch, session: Session) {
     dispatch({session})
+}
+
+export function getSessionProfile(state): null | Profile {
+    return state.session_profile
+}
+
+export function setSessionProfile(dispatch, profile: Profile) {
+    dispatch({session_profile: profile})
 }
 
 
