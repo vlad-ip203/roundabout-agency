@@ -6,7 +6,7 @@ import {MASONRY_BREAKPOINT_COLS} from "./config"
 import FilterPanel from "./FilterPanel"
 
 
-export default function Catalog({
+export default function CatalogPanel({
     content,
     cityFilterChangeListener,
     usecaseFilterChangeListener,

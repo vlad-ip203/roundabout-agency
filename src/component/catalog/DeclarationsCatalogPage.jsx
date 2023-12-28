@@ -2,12 +2,12 @@ import React, {useEffect, useState} from "react"
 import {Container} from "react-bootstrap"
 import {DB} from "../../index"
 import {Log} from "../../lib/log"
-import Catalog from "./Catalog"
+import CatalogPanel from "./CatalogPanel"
 import {TypeFilter} from "./config"
-import DeclarationTypeFilter from "./DeclarationTypeFilter"
-import ExchangeDeclarationCard from "./ExchangeDeclarationCard"
-import PurchaseDeclarationCard from "./PurchaseDeclarationCard"
-import SaleDeclarationCard from "./SaleDeclarationCard"
+import DeclarationTypeFilterBlock from "./DeclarationTypeFilterBlock"
+import ExchangeDeclarationCard from "./card/ExchangeDeclarationCard"
+import PurchaseDeclarationCard from "./card/PurchaseDeclarationCard"
+import SaleDeclarationCard from "./card/SaleDeclarationCard"
 import {tryResolve} from "./utils"
 
 
@@ -83,11 +83,11 @@ export default function DeclarationsCatalogPage({userFilter = "all"}) {
         </h4>
 
         <Container className="my-4">
-            <DeclarationTypeFilter typeFilterChangeListener={handleTypeFilterChange}/>
+            <DeclarationTypeFilterBlock typeFilterChangeListener={handleTypeFilterChange}/>
         </Container>
 
-        <Catalog content={content}
-                 cityFilterChangeListener={setCityFilter}
-                 usecaseFilterChangeListener={setUsecaseFilter}/>
+        <CatalogPanel content={content}
+                      cityFilterChangeListener={setCityFilter}
+                      usecaseFilterChangeListener={setUsecaseFilter}/>
     </>
 }

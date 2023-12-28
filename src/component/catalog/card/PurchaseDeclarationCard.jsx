@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react"
-import FacilityCard from "./FacilityCard"
-import {tryResolveFacility} from "./utils"
+import {tryResolveFacility} from "../utils"
 
 
-export default function SaleDeclarationCard({declaration}) {
+export default function PurchaseDeclarationCard({declaration}) {
     const [facility, setFacility] = useState(null)
 
     useEffect(() => {
@@ -19,8 +18,7 @@ export default function SaleDeclarationCard({declaration}) {
 
     return <>
         {facility &&
-            <FacilityCard facility={facility}
-                          className="declaration-sale"/>
+            <p>{declaration.summary}</p>
         }
     </>
 }
