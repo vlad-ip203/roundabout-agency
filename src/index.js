@@ -9,7 +9,7 @@ import ErrorPage from "./component/ErrorPage"
 import HomePage from "./component/HomePage"
 import RootLayout from "./component/layout/RootLayout"
 import SearchPage from "./component/SearchPage"
-import UserDeclarationsPage from "./component/user/UserDeclarationsPage"
+import UserContentCatalogPage, {ContentType} from "./component/user/UserContentCatalogPage"
 import UserProfilePage from "./component/user/UserProfilePage"
 import {App} from "./lib/consts"
 import {GlobalStateProvider} from "./lib/context"
@@ -33,7 +33,8 @@ const router = createBrowserRouter([{
         {path: App.ABOUT, element: <AboutPage/>},
         {path: App.AUTH, element: <AuthPage/>},
         {path: App.USER_PROFILE, element: <UserProfilePage/>},
-        {path: App.USER_DECLARATIONS, element: <UserDeclarationsPage/>},
+        {path: App.USER_FACILITIES, element: <UserContentCatalogPage contentType={ContentType.FACILITIES}/>},
+        {path: App.USER_DECLARATIONS, element: <UserContentCatalogPage contentType={ContentType.DECLARATIONS}/>},
     ],
 }])
 

@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from "react"
 import {Container} from "react-bootstrap"
 import {DB} from "../../index"
+import {Strings} from "../../lib/consts"
 import {Log} from "../../lib/log"
-import CatalogPanel from "./CatalogPanel"
-import {TypeFilter} from "./config"
-import DeclarationTypeFilterBlock from "./DeclarationTypeFilterBlock"
 import ExchangeDeclarationCard from "./card/ExchangeDeclarationCard"
 import PurchaseDeclarationCard from "./card/PurchaseDeclarationCard"
 import SaleDeclarationCard from "./card/SaleDeclarationCard"
+import CatalogPanel from "./CatalogPanel"
+import {TypeFilter} from "./config"
+import DeclarationTypeFilterBlock from "./DeclarationTypeFilterBlock"
 import {tryResolve} from "./utils"
 
 
@@ -79,7 +80,7 @@ export default function DeclarationsCatalogPage({userFilter = "all"}) {
         <h4>
             {userFilter === "all" ?
                 "Всі оголошення на сайті" :
-                "Мої оголошення"}
+                Strings.USER_DECLARATIONS}
         </h4>
 
         <Container className="my-4">

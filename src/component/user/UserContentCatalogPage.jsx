@@ -4,9 +4,16 @@ import {App} from "../../lib/consts"
 import {getSession, useGlobalState} from "../../lib/context"
 import {Log} from "../../lib/log"
 import DeclarationsCatalogPage from "../catalog/DeclarationsCatalogPage"
+import FacilitiesCatalogPage from "../catalog/FacilitiesCatalogPage"
 
 
-export default function UserDeclarationsPage() {
+export const ContentType = {
+    FACILITIES: 0,
+    DECLARATIONS: 1,
+}
+
+
+export default function UserContentCatalogPage({contentType}) {
     const [state] = useGlobalState()
     const session = getSession(state)
 
@@ -20,11 +27,12 @@ export default function UserDeclarationsPage() {
             return navigate(App.AUTH)
 
         const {user} = session
-        
+
         Log.i(`Applying filters: user=${user.id}`)
         setUserFilter(user.id)
     }, [navigate, session])
 
-
-    return <DeclarationsCatalogPage userFilter={userFilter}/>
+    return contentType === ContentType.FACILITIES ?
+        <FacilitiesCatalogPage userFilter={userFilter}/> :
+        <DeclarationsCatalogPage userFilter={userFilter}/>
 }

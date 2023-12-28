@@ -5,6 +5,7 @@ export class App {
     static ABOUT = "/about"
     static AUTH = "/auth"
     static USER_PROFILE = "/user/profile"
+    static USER_FACILITIES = "/user/facilities"
     static USER_DECLARATIONS = "/user/declarations"
 }
 
@@ -17,6 +18,7 @@ export class Strings {
     static ABOUT = "Про нас"
     static AUTH = "Вхід/Реєстрація"
     static USER_PROFILE = "Профіль"
+    static USER_FACILITIES = "Моя нерухомість"
     static USER_DECLARATIONS = "Мої оголошення"
     static SIGN_OUT = "Вийти"
 }
