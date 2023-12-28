@@ -3,7 +3,7 @@ import {Col, Row} from "react-bootstrap"
 import Masonry from "react-masonry-css"
 import {Log} from "../../lib/log"
 import {MASONRY_BREAKPOINT_COLS} from "./config"
-import FiltersPanel from "./FiltersPanel"
+import FilterPanel from "./FilterPanel"
 
 
 export default function Catalog({
@@ -32,8 +32,8 @@ export default function Catalog({
     return <>
         <Row>
             <Col md={3}>
-                <FiltersPanel cityFilterChangeListener={cityFilterChangeListener}
-                              usecaseFilterChangeListener={usecaseFilterChangeListener}/>
+                <FilterPanel cityFilterChangeListener={cityFilterChangeListener}
+                             usecaseFilterChangeListener={usecaseFilterChangeListener}/>
             </Col>
 
             <Col md={9}>

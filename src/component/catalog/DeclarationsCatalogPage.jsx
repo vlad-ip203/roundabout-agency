@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react"
-import {Button, ButtonGroup, Container} from "react-bootstrap"
+import {Container} from "react-bootstrap"
 import {DB} from "../../index"
 import {Log} from "../../lib/log"
 import Catalog from "./Catalog"
 import {TypeFilter} from "./config"
+import DeclarationTypeFilter from "./DeclarationTypeFilter"
 import ExchangeDeclarationCard from "./ExchangeDeclarationCard"
 import PurchaseDeclarationCard from "./PurchaseDeclarationCard"
 import SaleDeclarationCard from "./SaleDeclarationCard"
@@ -62,8 +63,8 @@ export default function DeclarationsCatalogPage({userFilter = "all"}) {
         }
     }, [cityFilter, declarations, typeFilter, usecaseFilter, userFilter])
 
-    function handleTypeFilterChange(filter) {
-        setTypeFilter(filter)
+    function handleTypeFilterChange(type) {
+        setTypeFilter(type)
 
         Log.i(`Applying filters: type=${typeFilter}`)
     }
@@ -82,11 +83,7 @@ export default function DeclarationsCatalogPage({userFilter = "all"}) {
         </h4>
 
         <Container className="my-4">
-            <ButtonGroup className="w-100">
-                <Button type="radio" onClick={() => handleTypeFilterChange("sale")}>Продаж</Button>
-                <Button type="radio" onClick={() => handleTypeFilterChange("exchange")}>Обмін</Button>
-                <Button type="radio" onClick={() => handleTypeFilterChange("purchase")}>Покупка</Button>
-            </ButtonGroup>
+            <DeclarationTypeFilter typeFilterChangeListener={handleTypeFilterChange}/>
         </Container>
 
         <Catalog content={content}

@@ -6,7 +6,7 @@ import {onlyUniqueComparator} from "../../lib/utils"
 import {tryResolve} from "./utils"
 
 
-export default function FiltersPanel({
+export default function FilterPanel({
     cityFilterChangeListener,
     usecaseFilterChangeListener,
 }) {
@@ -45,8 +45,8 @@ export default function FiltersPanel({
                 <Form.Label>Місто</Form.Label>
                 <Form.Control as="select">
                     <option value="all">Всі</option>
-                    {cityFilters.map(city =>
-                        <option value={city}>{city}</option>,
+                    {cityFilters.map((city, index) =>
+                        <option key={`city${index}`} value={city}>{city}</option>,
                     )}
                 </Form.Control>
             </Form.Group>
