@@ -1,6 +1,3 @@
-import {DB} from "../../index"
-
-
 export class Profile {
     id: number
     created_at: string
@@ -50,16 +47,6 @@ export class Facility {
         this.type_usecase = data.type_usecase
         this.image_urls = data.image_urls
     }
-}
-
-export async function tryResolveFacility(id) {
-    if (!id)
-        return
-
-    const {error, data} = await DB.getFacility(id)
-
-    if (!error)
-        return new Facility(data)
 }
 
 

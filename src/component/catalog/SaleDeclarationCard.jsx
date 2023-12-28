@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
-import {tryResolveFacility} from "../../lib/db/objects"
 import FacilityCard from "./FacilityCard"
+import {tryResolveFacility} from "./utils"
 
 
 export default function SaleDeclarationCard({declaration}) {

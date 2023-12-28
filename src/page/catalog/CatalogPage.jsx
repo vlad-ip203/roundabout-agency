@@ -153,7 +153,7 @@ export default function CatalogPage() {
 
             <Col md={9}>
                 {content === "loading" ? "Завантаження..." :
-                    content === "empty" ? "Ще немає оголошень. Спробуйте інші фільтри" :
+                    content === "empty" ? "Немає оголошень. Спробуйте інші фільтри" :
                         content}
             </Col>
         </Row>
