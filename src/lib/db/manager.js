@@ -291,10 +291,6 @@ export default class DatabaseManager {
     }
 
     async rejectDeclaration(id, evaluator_id) {
-        const updates = {
-            evaluator_id,
-        }
-
         const {
             error,
         } = await this.#declarations()
