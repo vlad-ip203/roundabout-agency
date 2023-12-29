@@ -19,7 +19,7 @@ export default function UserContentCatalogPage({contentType}) {
 
     const navigate = useNavigate()
 
-    const userFilter = profile || "all"
+    const userFilter = profile.id || "all"
     Log.i(`Applying filters: user=${userFilter}`)
 
     useEffect(() => {
