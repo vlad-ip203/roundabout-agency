@@ -1,4 +1,4 @@
-import React, {useEffect} from "react"
+import React, {useEffect, useState} from "react"
 import {useNavigate} from "react-router-dom"
 import {App} from "../../lib/consts"
 import {getSessionProfile, useGlobalState} from "../../lib/context"
@@ -19,13 +19,15 @@ export default function UserContentCatalogPage({contentType}) {
 
     const navigate = useNavigate()
 
-    const userFilter = profile.id || "all"
-    Log.i(`Applying filters: user=${userFilter}`)
+    const [userFilter, setUserFilter] = useState("all")
 
     useEffect(() => {
         //User not authorized, return to auth page
         if (!profile)
             return navigate(App.AUTH)
+
+        Log.i(`Applying filters: user=${profile.id}`)
+        setUserFilter(profile.id)
     }, [navigate, profile])
 
     return contentType === ContentType.FACILITIES ?
