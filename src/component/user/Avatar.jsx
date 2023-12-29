@@ -26,7 +26,7 @@ export default function Avatar({size, url}) {
         }
     }
 
-    return <Image className="rounded-circle mb-3 profile-picture"
+    return <Image className="rounded-circle profile-picture"
                   height={size}
                   width={size}
                   src={avatarUrl}

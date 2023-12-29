@@ -7,6 +7,9 @@ export class App {
     static ABOUT = "/about"
     static AUTH = "/auth"
 
+    static FACILITY_VIEW = "/facility/:id"
+    static DECLARATION_VIEW = "/declaration/:id"
+
     static USER_PROFILE = "/user/profile"
     static USER_FACILITIES = "/user/facilities"
     static USER_DECLARATIONS = "/user/declarations"

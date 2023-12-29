@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react"
-import FacilityCard from "./FacilityCard"
+import {App} from "../../../lib/consts"
+import FacilityCard from "../facility/FacilityCard"
 import {tryResolveFacility} from "../utils"
 
 
@@ -20,7 +21,8 @@ export default function SaleDeclarationCard({declaration}) {
     return <>
         {facility &&
             <FacilityCard facility={facility}
-                          className="declaration-sale"/>
+                          className="declaration-sale"
+                          linkTo={App.DECLARATION_VIEW.replace(":id", declaration.id)}/>
         }
     </>
 }

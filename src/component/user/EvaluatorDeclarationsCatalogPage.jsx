@@ -17,8 +17,6 @@ export default function EvaluatorDeclarationsCatalogPage() {
         if (!profile)
             return navigate(App.AUTH)
 
-        console.log(profile)
-
         if (profile.role !== ProfileRole.EVALUATOR)
             return navigate(App.ERROR_FORBIDDEN)
     }, [navigate, profile])

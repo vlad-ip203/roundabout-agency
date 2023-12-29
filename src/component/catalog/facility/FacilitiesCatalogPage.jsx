@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react"
-import {DB} from "../../index"
-import {Strings} from "../../lib/consts"
-import FacilityCard from "./card/FacilityCard"
-import CatalogPanel from "./CatalogPanel"
+import {DB} from "../../../index"
+import {App, Strings} from "../../../lib/consts"
+import CatalogPanel from "../CatalogPanel"
+import FacilityCard from "./FacilityCard"
 
 
 export default function FacilitiesCatalogPage({userFilter = "all"}) {
@@ -31,7 +31,11 @@ export default function FacilitiesCatalogPage({userFilter = "all"}) {
                 .filter(f => userFilter === "all" || f.user_id === userFilter)
                 .filter(f => cityFilter === "all" || f.city === cityFilter)
                 .filter(f => usecaseFilter === "all" || f.type_usecase === usecaseFilter)
-                .map(f => <FacilityCard key={f.id} facility={f}/>))
+                .map(f =>
+                    <FacilityCard key={f.id}
+                                  facility={f}
+                                  linkTo={App.FACILITY_VIEW.replace(":id", f.id)}/>,
+                ))
         } else {
             //List is empty, no data
             setContent([])

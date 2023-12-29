@@ -4,7 +4,9 @@ import "./style/index.scss"
 import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom"
 import AboutPage from "./component/AboutPage"
 import AuthPage from "./component/auth/AuthPage"
+import ViewDeclarationPage from "./component/catalog/declaration/ViewDeclarationPage"
 import DeclarationsCatalogPage from "./component/catalog/DeclarationsCatalogPage"
+import ViewFacilityPage from "./component/catalog/facility/ViewFacilityPage"
 import ForbiddenPage from "./component/error/ForbiddenPage"
 import NotFoundPage from "./component/error/NotFoundPage"
 import HomePage from "./component/home/HomePage"
@@ -36,6 +38,10 @@ const router = createBrowserRouter([{
         {path: App.SEARCH, element: <SearchPage/>},
         {path: App.ABOUT, element: <AboutPage/>},
         {path: App.AUTH, element: <AuthPage/>},
+
+        {path: App.FACILITY_VIEW, element: <ViewFacilityPage/>},
+        {path: App.DECLARATION_VIEW, element: <ViewDeclarationPage/>},
+
         {path: App.USER_PROFILE, element: <UserProfilePage/>},
         {path: App.USER_FACILITIES, element: <UserContentCatalogPage contentType={ContentType.FACILITIES}/>},
         {path: App.USER_DECLARATIONS, element: <UserContentCatalogPage contentType={ContentType.DECLARATIONS}/>},

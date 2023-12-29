@@ -4,9 +4,9 @@ import {Link} from "react-router-dom"
 import Slider from "react-slick"
 import {DB} from "../../index"
 import {App} from "../../lib/consts"
-import ExchangeDeclarationCard from "../catalog/card/ExchangeDeclarationCard"
-import PurchaseDeclarationCard from "../catalog/card/PurchaseDeclarationCard"
-import SaleDeclarationCard from "../catalog/card/SaleDeclarationCard"
+import ExchangeDeclarationCard from "../catalog/declaration/ExchangeDeclarationCard"
+import PurchaseDeclarationCard from "../catalog/declaration/PurchaseDeclarationCard"
+import SaleDeclarationCard from "../catalog/declaration/SaleDeclarationCard"
 import LogoBanner from "../logo/LogoBanner"
 import {cardSliderSettings, imageSliderSettings, sliderImages} from "./config"
 import styles from "./styles.module.css"
@@ -24,8 +24,8 @@ export default function HomePage() {
 
                 if (!error)
                     setSaleDeclarations(data.map((value, index) =>
-                        <Container className="mr-4">
-                            <SaleDeclarationCard key={`sale${index}`} declaration={value}/>
+                        <Container key={`sale${index}`} className="mr-4">
+                            <SaleDeclarationCard declaration={value}/>
                         </Container>,
                     ))
             }
@@ -34,8 +34,8 @@ export default function HomePage() {
 
                 if (!error)
                     setExchangeDeclarations(data.map((value, index) =>
-                        <Container className="mr-4">
-                            <ExchangeDeclarationCard key={`exchange${index}`} declaration={value}/>
+                        <Container key={`exchange${index}`} className="mr-4">
+                            <ExchangeDeclarationCard declaration={value}/>
                         </Container>,
                     ))
             }
@@ -44,8 +44,8 @@ export default function HomePage() {
 
                 if (!error)
                     setPurchaseDeclarations(data.map((value, index) =>
-                        <Container className="mr-4">
-                            <PurchaseDeclarationCard kekey={`purchase${index}`} declaration={value}/>
+                        <Container key={`purchase${index}`} className="mr-4">
+                            <PurchaseDeclarationCard declaration={value}/>
                         </Container>,
                     ))
             }

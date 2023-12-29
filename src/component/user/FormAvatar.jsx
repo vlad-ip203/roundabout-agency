@@ -50,8 +50,8 @@ export default function FormAvatar({size, url, onUpload}) {
                     url={url}/>
 
             <Form.Control id="pictureControl"
+                          className="d-none mt-3"
                           type="file"
-                          className="d-none"
                           onChange={uploadAvatar}
                           disabled={uploading}/>
         </Form.Label>

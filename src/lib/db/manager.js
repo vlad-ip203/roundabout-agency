@@ -273,6 +273,33 @@ export default class DatabaseManager {
         return out
     }
 
+    async getExchangeDeclaration(id) {
+        const {
+            data,
+            error,
+        } = await this.#exchangeDeclarations()
+            .select(`
+                ${DECLARATIONS_EXCHANGE_COLUMNS},
+                ${DECLARATIONS} ( ${DECLARATIONS_COLUMNS} )
+            `)
+            .eq(PRIMARY_KEY, id)
+            .single()
+
+        const out = {
+            error: "",
+            data: null,
+        }
+
+        if (error) {
+            out.error = "Error getting exchange declaration: " + error.message
+            Log.w(out.error)
+            return out
+        }
+
+        out.data = new ExchangeDeclaration(data)
+        return out
+    }
+
 
     #purchaseDeclarations() {
         return this._client.from(DECLARATIONS_PURCHASE)
@@ -305,6 +332,33 @@ export default class DatabaseManager {
         return out
     }
 
+    async getPurchaseDeclaration(id) {
+        const {
+            data,
+            error,
+        } = await this.#purchaseDeclarations()
+            .select(`
+                ${DECLARATIONS_PURCHASE_COLUMNS},
+                ${DECLARATIONS} ( ${DECLARATIONS_COLUMNS} )
+            `)
+            .eq(PRIMARY_KEY, id)
+            .single()
+
+        const out = {
+            error: "",
+            data: null,
+        }
+
+        if (error) {
+            out.error = "Error getting purchase declaration: " + error.message
+            Log.w(out.error)
+            return out
+        }
+
+        out.data = new PurchaseDeclaration(data)
+        return out
+    }
+
 
     #saleDeclarations() {
         return this._client.from(DECLARATIONS_SALE)
@@ -334,6 +388,33 @@ export default class DatabaseManager {
         for (const i in data)
             out.data.push(new SaleDeclaration(data[i]))
         Log.v(`Returning ${out.data.length} sale declarations`)
+        return out
+    }
+
+    async getSaleDeclaration(id) {
+        const {
+            data,
+            error,
+        } = await this.#saleDeclarations()
+            .select(`
+                ${DECLARATIONS_SALE_COLUMNS},
+                ${DECLARATIONS} ( ${DECLARATIONS_COLUMNS} )
+            `)
+            .eq(PRIMARY_KEY, id)
+            .single()
+
+        const out = {
+            error: "",
+            data: null,
+        }
+
+        if (error) {
+            out.error = "Error getting sale declaration: " + error.message
+            Log.w(out.error)
+            return out
+        }
+
+        out.data = new SaleDeclaration(data)
         return out
     }
 }

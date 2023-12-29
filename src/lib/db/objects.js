@@ -61,6 +61,7 @@ export class Facility {
 
 export class Declaration {
     id: number
+    created_at: string
     issuer_id: string
     consumer_id: string
     evaluator_id: string

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react"
-import FacilityCard from "./FacilityCard"
+import {App} from "../../../lib/consts"
+import FacilityCard from "../facility/FacilityCard"
 import {tryResolveFacility} from "../utils"
 
 
@@ -25,7 +26,8 @@ export default function ExchangeDeclarationCard({declaration}) {
     return <>
         {facility &&
             <FacilityCard facility={facility}
-                          className="declaration-exchange"/>
+                          className="declaration-exchange"
+                          linkTo={App.DECLARATION_VIEW.replace(":id", declaration.id)}/>
         }
     </>
 }
