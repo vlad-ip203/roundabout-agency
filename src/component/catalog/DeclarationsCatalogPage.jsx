@@ -3,11 +3,11 @@ import {Container} from "react-bootstrap"
 import {DB} from "../../index"
 import {Strings} from "../../lib/consts"
 import {Log} from "../../lib/log"
+import CatalogPanel from "./CatalogPanel"
+import {TypeFilter} from "./config"
 import ExchangeDeclarationCard from "./declaration/ExchangeDeclarationCard"
 import PurchaseDeclarationCard from "./declaration/PurchaseDeclarationCard"
 import SaleDeclarationCard from "./declaration/SaleDeclarationCard"
-import CatalogPanel from "./CatalogPanel"
-import {TypeFilter} from "./config"
 import DeclarationTypeFilterBlock from "./DeclarationTypeFilterBlock"
 import {tryResolve} from "./utils"
 
@@ -56,11 +56,12 @@ export default function DeclarationsCatalogPage({
     useEffect(() => {
         if (declarations) {
             setContent(declarations
-                .filter(d => userFilter === "all" || d.issuer_id === userFilter)
-                .filter(d => !evaluatorModeFilter || !d.evaluator_id)
-                .filter(d => typeFilter === TypeFilter.UNSET || d.type === typeFilter)
-                .filter(d => cityFilter === "all" || (d.facility && d.facility.city === cityFilter))
-                .filter(d => usecaseFilter === "all" || (d.facility && d.facility.type_usecase === usecaseFilter))
+                .filter(d => userFilter === "all" || d.issuer_id === userFilter) //Belong to specific user
+                .filter(d => userFilter === "all" && d.open || userFilter !== "all") //Is declaration open
+                .filter(d => !evaluatorModeFilter || !d.evaluator_id) //Requires verification
+                .filter(d => typeFilter === TypeFilter.UNSET || d.type === typeFilter) //Specific type applies here
+                .filter(d => cityFilter === "all" || (d.facility && d.facility.city === cityFilter)) //City filter
+                .filter(d => usecaseFilter === "all" || (d.facility && d.facility.type_usecase === usecaseFilter)) //Usecase filter
                 .map(getDeclarationCard))
         } else {
             //List is empty, no data
