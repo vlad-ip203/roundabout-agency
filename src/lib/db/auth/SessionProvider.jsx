@@ -8,7 +8,6 @@ async function trySavingSessionAndProfile(dispatch, session: Session | null) {
     setSession(dispatch, session)
 
     if (session) {
-        //TODO 28.12.2023: Save user too
         const {user} = session
 
         const {error, data} = await DB.getProfile(user.id)

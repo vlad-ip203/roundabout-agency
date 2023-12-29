@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import {Form} from "react-bootstrap"
 import {DB} from "../../index"
-import {getSession, useGlobalState} from "../../lib/context"
+import {getSessionProfile, useGlobalState} from "../../lib/context"
 import {Log} from "../../lib/log"
 import Avatar from "./Avatar"
 
@@ -21,13 +21,12 @@ export default function FormAvatar({size, url, onUpload}) {
             return
         }
 
-        const session = getSession(state)
-        const {user} = session
+        const profile = getSessionProfile(state)
 
         const file = files[0]
         const fileExt = file.name.split(".").pop()
         const fileName = `${Math.random()}.${fileExt}`
-        const path = `${user.id}/${fileName}`
+        const path = `${profile.id}/${fileName}`
 
         Log.i("Uploading image with URL: " + path)
         const {error} = await DB.uploadAvatar(path, file)

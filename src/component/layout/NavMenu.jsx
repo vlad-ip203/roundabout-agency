@@ -1,14 +1,12 @@
 import {faCircleHalfStroke, faMoon, faSun} from "@fortawesome/free-solid-svg-icons"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import React, {useEffect, useState} from "react"
+import React from "react"
 import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap"
 import {Link} from "react-router-dom"
-import {DB} from "../../index"
 import {App, Strings} from "../../lib/consts"
-import {getSession, getTheme, setTheme, useGlobalState} from "../../lib/context"
+import {getSessionProfile, getTheme, setTheme, useGlobalState} from "../../lib/context"
 import {signOut} from "../../lib/db/auth/auth"
 import {ProfileRole} from "../../lib/db/objects"
-import {Log} from "../../lib/log"
 import {THEME_DARK, THEME_LIGHT, THEME_SYSTEM} from "../../lib/theme/consts"
 import Logo from "../logo/Logo"
 
@@ -42,34 +40,7 @@ function getThemeIcon(state, dispatch) {
 
 export default function NavMenu() {
     const [state, dispatch] = useGlobalState()
-
-    const [profile, setProfile] = useState(null)
-
-    //Add user menu items
-    useEffect(() => {
-        const session = getSession(state)
-
-        //User not authorized, leaving guest mode
-        if (!session)
-            return
-
-        async function getProfile() {
-            Log.v("Getting user profile for NavMenu")
-
-            const {user} = session
-
-            const {error, data} = await DB.getProfile(user.id)
-
-            if (error) {
-                //Notify user about a problem
-                alert(error)
-            } else {
-                //Update profile properties
-                setProfile(data)
-            }
-        }
-        void getProfile()
-    }, [state])
+    const profile = getSessionProfile(state)
 
     return (
         <Navbar className="px-2 bg-body-tertiary"
