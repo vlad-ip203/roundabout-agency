@@ -6,7 +6,7 @@ import {App, Strings} from "../../lib/consts"
 import {getSession, reload, useGlobalState} from "../../lib/context"
 import {signOut} from "../../lib/db/auth/auth"
 import {Log} from "../../lib/log"
-import Avatar from "./Avatar"
+import FormAvatar from "./FormAvatar"
 
 
 export default function UserProfilePage() {
@@ -96,9 +96,9 @@ export default function UserProfilePage() {
             <Col md={{span: 6, offset: 3}}>
                 <Form onSubmit={updateProfile}>
                     <Container className="mb-3 text-center">
-                        <Avatar size={150}
-                                url={avatarURL}
-                                onUpload={onPictureChange}/>
+                        <FormAvatar size={150}
+                                    url={avatarURL}
+                                    onUpload={onPictureChange}/>
                     </Container>
 
                     <Form.Group className="mb-3">
