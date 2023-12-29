@@ -241,6 +241,78 @@ export default class DatabaseManager {
         return out
     }
 
+    async joinDeclaration(id, consumer_id) {
+        const updates = {
+            consumer_id,
+            evaluator_id: null, //Also, reset previously evaluated status
+        }
+
+        const {
+            error,
+        } = await this.#declarations()
+            .update(updates)
+            .eq(PRIMARY_KEY, id)
+
+        const out = {
+            error: "",
+        }
+
+        if (error) {
+            out.error = "Error updating declaration: " + error.message
+            Log.w(out.error)
+        }
+
+        return out
+    }
+
+    async approveDeclaration(id, consumer_id, evaluator_id) {
+        const updates = {
+            consumer_id,
+            evaluator_id,
+            open: consumer_id == null
+        }
+
+        const {
+            error,
+        } = await this.#declarations()
+            .update(updates)
+            .eq(PRIMARY_KEY, id)
+
+        const out = {
+            error: "",
+        }
+
+        if (error) {
+            out.error = "Error updating declaration: " + error.message
+            Log.w(out.error)
+        }
+
+        return out
+    }
+
+    async rejectDeclaration(id, evaluator_id) {
+        const updates = {
+            evaluator_id,
+        }
+
+        const {
+            error,
+        } = await this.#declarations()
+            .delete()
+            .eq(PRIMARY_KEY, id)
+
+        const out = {
+            error: "",
+        }
+
+        if (error) {
+            out.error = "Error updating declaration: " + error.message
+            Log.w(out.error)
+        }
+
+        return out
+    }
+
 
     #exchangeDeclarations() {
         return this._client.from(DECLARATIONS_EXCHANGE)

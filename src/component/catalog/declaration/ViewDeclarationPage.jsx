@@ -1,14 +1,21 @@
 import React, {useEffect, useState} from "react"
-import {Carousel, Col, Container, Row, Table} from "react-bootstrap"
-import {Link, useParams} from "react-router-dom"
+import {Button, ButtonGroup, Carousel, Col, Container, Row, Table} from "react-bootstrap"
+import {Link, useNavigate, useParams} from "react-router-dom"
 import {DB} from "../../../index"
 import {App} from "../../../lib/consts"
+import {getSessionProfile, reload, useGlobalState} from "../../../lib/context"
+import {ProfileRole} from "../../../lib/db/objects"
 import ProfilePill from "../../user/ProfilePill"
 import {TypeFilter} from "../config"
 import {tryResolve, tryResolveFacility} from "../utils"
 
 
 export default function ViewDeclarationPage() {
+    const [state] = useGlobalState()
+    const profile = getSessionProfile(state)
+
+    const navigate = useNavigate()
+
     const {id} = useParams()
     const [declaration, setDeclaration] = useState(null)
     const [facility, setFacility] = useState(null)
@@ -54,6 +61,19 @@ export default function ViewDeclarationPage() {
     if (!declaration)
         return "Декларацію за цим ідентифікатором не знайдено"
 
+    function handleConsumerJoin() {
+        DB.joinDeclaration(declaration.id, profile.id)
+            .then(() => reload())
+    }
+    function handleEvaluatorApproval() {
+        DB.approveDeclaration(declaration.id, consumerProfile.id, profile.id)
+            .then(() => reload())
+    }
+    function handleEvaluatorRejection() {
+        DB.rejectDeclaration(declaration.id, profile.id)
+            .then(() => navigate(App.DECLARATION_VIEW))
+    }
+
     return (
         <Container className="my-5">
             <h1>{declaration.title}</h1>
@@ -62,7 +82,7 @@ export default function ViewDeclarationPage() {
 
             <Row className="my-5">
                 <Col md={5}>
-                    <h2>Зацікавлені сторони</h2>
+                    <h2 className="mb-3">Зацікавлені сторони</h2>
 
                     <Table striped bordered hover>
                         <tbody>
@@ -76,26 +96,37 @@ export default function ViewDeclarationPage() {
                         </tr>
                         <tr>
                             <td>Споживач</td>
-                            <td>
-                                {consumerProfile &&
-                                    <ProfilePill profile={consumerProfile}/>
-                                }
-                            </td>
+                            <td>{!profile ?
+                                "Спочатку необхідно авторизуватися" :
+                                consumerProfile ?
+                                    <ProfilePill profile={consumerProfile}/> :
+                                    profile.role === ProfileRole.USER ?
+                                        <Button variant="primary" onClick={handleConsumerJoin}>Приєднатися</Button> :
+                                        "Ще немає"
+                            }</td>
                         </tr>
                         <tr>
                             <td>Рієлтор-оцінник</td>
-                            <td>
-                                {evaluatorProfile &&
-                                    <ProfilePill profile={evaluatorProfile}/>
-                                }
-                            </td>
+                            <td>{!profile ?
+                                "" :
+                                evaluatorProfile ?
+                                    <ProfilePill profile={evaluatorProfile}/> :
+                                    profile.role === ProfileRole.EVALUATOR ?
+                                        <ButtonGroup>
+                                            <Button variant="primary"
+                                                    onClick={handleEvaluatorApproval}>Ухвалити</Button>
+                                            <Button variant="secondary"
+                                                    onClick={handleEvaluatorRejection}>Відхилити</Button>
+                                        </ButtonGroup> :
+                                        "Очікується оцінка"
+                            }</td>
                         </tr>
                         </tbody>
                     </Table>
                 </Col>
 
                 <Col md={7}>
-                    <h2>Інформація</h2>
+                    <h2 className="mb-3">Інформація</h2>
 
                     <Table striped bordered hover>
                         <tbody>
@@ -115,6 +146,8 @@ export default function ViewDeclarationPage() {
                         </tr>
                         </tbody>
                     </Table>
+
+                    <h2 className="mt-4 mb-3">Галерея</h2>
 
                     {facility &&
                         <Carousel className="my-3">
