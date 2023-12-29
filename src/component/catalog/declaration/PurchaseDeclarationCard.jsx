@@ -1,6 +1,6 @@
 import {faCoins} from "@fortawesome/free-solid-svg-icons"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import React, {useEffect, useState} from "react"
+import React, {useEffect} from "react"
 import {Card} from "react-bootstrap"
 import {Link} from "react-router-dom"
 import {App} from "../../../lib/consts"
@@ -20,20 +20,20 @@ export default function PurchaseDeclarationCard({declaration}) {
 
     return <>
         <Link to={App.DECLARATION_VIEW.replace(":id", declaration.id)}>
-                <Card className="my-4 declaration-purchase">
-                    <Card.Body>
-                        <Card.Title>{declaration.title}</Card.Title>
-                        <Card.Text>{declaration.summary}</Card.Text>
+            <Card className="my-4 declaration-purchase">
+                <Card.Body>
+                    <Card.Title>{declaration.title}</Card.Title>
+                    <Card.Text>{declaration.summary}</Card.Text>
 
-                        <Card.Text className="text-body-tertiary"
-                                   style={{fontSize: "0.93rem"}}>
-                            <FontAwesomeIcon icon={faCoins}
-                                             width={28}/>
-                            {" "}
-                            Ціна: {declaration.price}
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
-            </Link>
+                    <Card.Text className="text-body-tertiary"
+                               style={{fontSize: "0.93rem"}}>
+                        <FontAwesomeIcon icon={faCoins}
+                                         width={28}/>
+                        {" "}
+                        Ціна: {declaration.price}
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+        </Link>
     </>
 }
