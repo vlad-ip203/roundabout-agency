@@ -26,7 +26,7 @@ export default function UserContentCatalogPage({contentType}) {
         //User not authorized, return to auth page
         if (!profile)
             return navigate(App.AUTH)
-    }, [navigate])
+    }, [navigate, profile])
 
     return contentType === ContentType.FACILITIES ?
         <FacilitiesCatalogPage userFilter={userFilter}/> :

@@ -11,7 +11,6 @@ import ForbiddenPage from "./component/error/ForbiddenPage"
 import NotFoundPage from "./component/error/NotFoundPage"
 import HomePage from "./component/home/HomePage"
 import RootLayout from "./component/layout/RootLayout"
-import SearchPage from "./component/SearchPage"
 import EvaluatorDeclarationsCatalogPage from "./component/user/EvaluatorDeclarationsCatalogPage"
 import UserContentCatalogPage, {ContentType} from "./component/user/UserContentCatalogPage"
 import UserProfilePage from "./component/user/UserProfilePage"
@@ -35,7 +34,6 @@ const router = createBrowserRouter([{
         {path: App.ERROR_FORBIDDEN, element: <ForbiddenPage/>},
 
         {path: App.CATALOG, element: <DeclarationsCatalogPage/>},
-        {path: App.SEARCH, element: <SearchPage/>},
         {path: App.ABOUT, element: <AboutPage/>},
         {path: App.AUTH, element: <AuthPage/>},
 

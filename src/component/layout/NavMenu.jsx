@@ -57,7 +57,6 @@ export default function NavMenu() {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <Link className="nav-link" to={App.CATALOG}>{Strings.CATALOG}</Link>
-                        <Link className="nav-link" to={App.SEARCH}>{Strings.SEARCH}</Link>
                         <Link className="nav-link" to={App.ABOUT}>{Strings.ABOUT}</Link>
                     </Nav>
 

@@ -3,7 +3,6 @@ export class App {
     static ERROR_FORBIDDEN = "/forbidden"
 
     static CATALOG = "/catalog"
-    static SEARCH = "/search"
     static ABOUT = "/about"
     static AUTH = "/auth"
 
@@ -23,7 +22,6 @@ export class Strings {
     static HOME = "Головна"
 
     static CATALOG = "Оголошення"
-    static SEARCH = "Пошук"
     static ABOUT = "Про нас"
     static AUTH = "Вхід/Реєстрація"
 
