@@ -29,6 +29,10 @@ $color-mode-type: data;
     background-color: #f8e3e3 !important;
 }
 
+.declaration-closed {
+    background-color: #c9c9c9 !important;
+}
+
 @include color-mode(dark) {
     .declaration-exchange {
         background-color: #20394b !important;
@@ -40,5 +44,9 @@ $color-mode-type: data;
 
     .declaration-sale {
         background-color: #602a2a !important;
+    }
+
+    .declaration-closed {
+        background-color: #3f3f3f !important;
     }
 }

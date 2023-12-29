@@ -21,7 +21,7 @@ export default function SaleDeclarationCard({declaration}) {
     return <>
         {facility &&
             <FacilityCard facility={facility}
-                          className="declaration-sale"
+                          className={declaration.open ? "declaration-sale" : "declaration-closed"}
                           linkTo={App.DECLARATION_VIEW.replace(":id", declaration.id)}/>
         }
     </>

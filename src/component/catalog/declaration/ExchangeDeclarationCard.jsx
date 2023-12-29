@@ -26,7 +26,7 @@ export default function ExchangeDeclarationCard({declaration}) {
     return <>
         {facility &&
             <FacilityCard facility={facility}
-                          className="declaration-exchange"
+                          className={declaration.open ? "declaration-exchange" : "declaration-closed"}
                           linkTo={App.DECLARATION_VIEW.replace(":id", declaration.id)}/>
         }
     </>
