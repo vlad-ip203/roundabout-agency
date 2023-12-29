@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react"
-import {DB} from "../../../index"
-import {App, Strings} from "../../../lib/consts"
-import CatalogPanel from "../CatalogPanel"
-import FacilityCard from "./FacilityCard"
+import {DB} from "../../index"
+import {App, Strings} from "../../lib/consts"
+import CatalogPanel from "./CatalogPanel"
+import FacilityCard from "./facility/FacilityCard"
 
 
 export default function FacilitiesCatalogPage({userFilter = "all"}) {

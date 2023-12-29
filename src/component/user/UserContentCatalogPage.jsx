@@ -4,7 +4,7 @@ import {App} from "../../lib/consts"
 import {getSession, useGlobalState} from "../../lib/context"
 import {Log} from "../../lib/log"
 import DeclarationsCatalogPage from "../catalog/DeclarationsCatalogPage"
-import FacilitiesCatalogPage from "../catalog/facility/FacilitiesCatalogPage"
+import FacilitiesCatalogPage from "../catalog/FacilitiesCatalogPage"
 
 
 export const ContentType = {
