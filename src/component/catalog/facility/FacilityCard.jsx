@@ -10,9 +10,11 @@ export default function FacilityCard({facility, className, linkTo}) {
         {facility &&
             <Link to={linkTo}>
                 <Card className={"my-4 " + className}>
-                    <Card.Img variant="top"
-                              src={facility.image_urls[0]}
-                              alt={facility.title}/>
+                    {facility.image_urls && facility.image_urls.length &&
+                        <Card.Img variant="top"
+                                  src={facility.image_urls[0]}
+                                  alt={facility.title}/>
+                    }
 
                     <Card.Body>
                         <Card.Title>{facility.title}</Card.Title>

@@ -1,24 +1,39 @@
+import {faCoins} from "@fortawesome/free-solid-svg-icons"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import React, {useEffect, useState} from "react"
+import {Card} from "react-bootstrap"
+import {Link} from "react-router-dom"
+import {App} from "../../../lib/consts"
 import {tryResolveFacility} from "../utils"
 
 
 export default function PurchaseDeclarationCard({declaration}) {
-    const [facility, setFacility] = useState(null)
-
     useEffect(() => {
         async function resolveDeclaration() {
             await tryResolveFacility(declaration.facility_id)
                 .then(value => {
                     declaration.facility = value
-                    setFacility(value)
                 })
         }
         void resolveDeclaration()
     }, [declaration])
 
     return <>
-        {facility &&
-            <p>{declaration.summary}</p>
-        }
+        <Link to={App.DECLARATION_VIEW.replace(":id", declaration.id)}>
+                <Card className="my-4 declaration-purchase">
+                    <Card.Body>
+                        <Card.Title>{declaration.title}</Card.Title>
+                        <Card.Text>{declaration.summary}</Card.Text>
+
+                        <Card.Text className="text-body-tertiary"
+                                   style={{fontSize: "0.93rem"}}>
+                            <FontAwesomeIcon icon={faCoins}
+                                             width={28}/>
+                            {" "}
+                            Ціна: {declaration.price}
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            </Link>
     </>
 }
